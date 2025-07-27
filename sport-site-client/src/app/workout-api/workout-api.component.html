@@ -1,0 +1,112 @@
+<!-- <p>test-api works!</p> -->
+<div class="wrapper">
+<div *ngIf="loading">Loading...</div>
+<div *ngIf="error">{{ error }}</div>
+
+<!-- <div *ngIf="!loading && !error">
+  <h3>API Response:</h3>
+  <pre>{{ data | json }}</pre>
+</div> -->
+
+<div *ngIf="!loading && !error">
+  <h3>API Workouts</h3>  
+ 
+<!-- <div class="cardif">
+
+<div *ngFor="let item of data" class="workout-card">
+    <div><h3>Workout ID: {{ item._id }}</h3></div>
+     <hr />
+    <div>
+    <p><strong>Type:</strong> {{ item.type }}</p>
+    <p><strong>Equipment:</strong> {{ item.equipment }}</p>
+    </div> <hr />
+        <div>
+          
+    <p><strong>Exercises:</strong></p>
+    <ul>
+      <li *ngFor="let ex of item.exercises">{{ ex.name }}</li>
+    </ul>
+    </div>
+    <hr />
+  </div>
+</div>
+</div>
+
+</div> -->
+
+<!-- 
+<div class="container-fluid footer py-5 wow fadeIn" data-wow-delay="0.2s">
+            <div class="container py-5">
+                 <div class="row g-8">
+                   
+                    <div class="col-md-6 col-lg-6 col-xl-3">
+                        <div class="footer-item">
+                            <h4 class="text-white mb-4">Recent Work</h4>
+                          <div *ngFor="let item of data" class="workout-card">
+                            <div class="row g-2">
+                             
+                                 <div class="col-3">
+                                        <div class="footer-item-img">
+                                          <a href="#"><img src="assets/img/work-9.jpg" class="img-fluid" alt=""></a>
+                                      
+                                        </div>
+                                        <div class="wo-text">
+                                          <h3> {{ item._id }}</h3>
+                                          <p><strong>Type:</strong> {{ item.type }}</p>
+                                           <p><strong>Equipment:</strong> {{ item.equipment }}</p>
+
+                                              <div>
+          
+                                                <p><strong>Exercises:</strong></p>
+                                                <ul>
+                                                  <li *ngFor="let ex of item.exercises">{{ ex.name }}</li>
+                                                </ul>
+                                              </div>
+                                        </div>    
+                                  </div>
+                         
+                                
+                            </div>
+                          </div>     
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+
+
+        <div class="bg-gray-900 py-10">
+  <div class="container mx-auto px-4">
+    <h4 class="text-white text-2xl font-semibold mb-6">Recent Work</h4>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <div *ngFor="let item of data" class="bg-white rounded-lg shadow p-4">
+        <div class="flex gap-4">
+          <div class="w-24 h-24 flex-shrink-0 overflow-hidden rounded-md">
+            <a href="#">
+              <img [src]="item.randomImage" alt="" class="w-full h-full object-cover" />
+              <!-- <img src="assets/img/work-9.jpg" alt="" class="w-full h-full object-cover" /> -->
+            </a>
+          </div>
+
+          <div class="flex-1">
+            <h3 class="text-lg font-bold text-gray-800">{{ item._id }}</h3>
+            <p class="text-sm text-gray-600"><strong>Type:</strong> {{ item.type }}</p>
+            <p class="text-sm text-gray-600"><strong>Equipment:</strong> {{ item.equipment }}</p>
+
+            <div class="mt-2">
+              <p class="text-sm font-medium text-gray-700">Exercises:</p>
+              <ul class="list-disc list-inside text-sm text-gray-600">
+                <li *ngFor="let ex of item.exercises">{{ ex.name }}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

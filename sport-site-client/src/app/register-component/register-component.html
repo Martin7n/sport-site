@@ -1,0 +1,50 @@
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()" novalidate>
+  <div>
+    <label>First Name</label>
+    <input formControlName="firstName">
+    <div *ngIf="submitted && f['firstName'].errors">
+      <small *ngIf="f['firstName'].errors?.['required']">First name is required.</small>
+      <small *ngIf="f['firstName'].errors?.['minlength']">Minimum 3 characters.</small>
+    </div>
+  </div>
+
+  <div>
+    <label>Last Name</label>
+    <input formControlName="lastName">
+    <div *ngIf="submitted && f['lastName'].errors">
+      <small *ngIf="f['lastName'].errors?.['required']">Last name is required.</small>
+      <small *ngIf="f['lastName'].errors?.['minlength']">Minimum 3 characters.</small>
+    </div>
+  </div>
+
+  <div>
+    <label>Username</label>
+    <input formControlName="username">
+    <div *ngIf="submitted && f['username'].errors">
+      <small *ngIf="f['username'].errors?.['required']">Username is required.</small>
+      <small *ngIf="f['username'].errors?.['minlength']">Minimum 2 characters.</small>
+      <small *ngIf="f['username'].errors?.['maxlength']">Maximum 20 characters.</small>
+    </div>
+  </div>
+
+  <div>
+    <label>Email</label>
+    <input formControlName="email">
+    <div *ngIf="submitted && f['email'].errors">
+      <small *ngIf="f['email'].errors?.['required']">Email is required.</small>
+      <small *ngIf="f['email'].errors?.['minlength']">Minimum 10 characters.</small>
+      <small *ngIf="f['email'].errors?.['pattern']">Email format is invalid.</small>
+    </div>
+  </div>
+
+  <div>
+    <label>Password</label>
+    <input type="password" formControlName="password">
+    <div *ngIf="submitted && f['password'].errors">
+      <small *ngIf="f['password'].errors?.['required']">Password is required.</small>
+      <small *ngIf="f['password'].errors?.['minlength']">Minimum 4 characters.</small>
+    </div>
+  </div>
+
+  <button type="submit">Register</button>
+</form>

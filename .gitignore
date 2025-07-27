@@ -28,3 +28,5 @@ node_modules
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+sport-site-client/src/enviroments/enviroment.ts
+sport-site-client/src/enviroments/environment.prod.ts

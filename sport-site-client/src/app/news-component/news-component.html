@@ -1,0 +1,19 @@
+<div *ngIf="loading">Loading news...</div>
+<div *ngIf="errorMessage">{{ errorMessage }}</div>
+
+<div *ngIf="!loading && !errorMessage" class="news-container">
+  <ul>
+    <li *ngFor="let article of displayedNews">
+      <h3>{{ article.title }}</h3>
+      <p>{{ article.description }}</p>
+      <p>{{ article.pubDate }}</p>
+      <a [href]="article.link" target="_blank">Read more</a>
+    </li>
+  </ul>
+
+  <div class="pagination">
+    <button (click)="previousPage()" [disabled]="currentPage === 1">Previous</button>
+    <span>Page {{ currentPage }} of {{ totalPages }}</span>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+  </div>
+</div>

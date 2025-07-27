@@ -25,7 +25,7 @@ app.use(expressSession({
         secure: false,
         httpOnly: true
     }
-}))
+}));
 
 
 
