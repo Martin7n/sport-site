@@ -1,0 +1,81 @@
+
+<section id="details-page">
+    <div class="main_card">
+        <div class="card_left">
+            <div class="card-details">
+
+                <h1>Model: {{data.manufacturer}} {{data.model}} </h1>
+                <h3>Posted by: {{data.owner.firstName}} {{data.owner.lastName}}</h3>
+
+                <div class="card-specs">
+                    <p class="card-manufacturer">Manufacturer: {{data.manufacturer}}</p>
+                    <p class="card-engine">Engine Type: {{data.engine}}</p>
+                    <p class="card-top-speed">Top Speed: {{data.topSpeed}}</p>
+                </div>
+
+                <p class="disc">
+                    Description: {{data.description}}                </p>
+
+                <!-- If there is no registered user, do not display buttons-->
+                {{#if owner}}
+                <div class="social-btn">
+                    <!-- Only for registered user and author of the post -->
+                    <a href="/cars/edit/{{data._id}}" class="edit-btn">Edit</a>
+                    <a href="/cars/delete/{{data._id}}" class="del-btn">Delete</a>
+                    <!-- logged in users, who have not yet liked-->
+                    {{!-- {{#if liked}}
+                    <p class="you-liked">Thanks For The Like</p>
+                    {{else}}
+                    <a href="/cars/like/{{data._id}}" class="like-btn">Like</a>
+                    {{/if}} --}}
+                    {{/if}}
+                     {{#if liked}}
+                 
+                    <p class="you-liked">Thanks For The Like</p>
+                  
+                    {{else}}
+                    {{#unless owner}}
+                    
+                <a href="/cars/like/{{data._id}}" class="like-btn">Like</a>
+                {{/unless}}
+                {{/if}}
+
+                </div>
+               
+
+            </div>
+        </div>
+        <div class="card_right">
+            <img src="{{data.image}}" alt="{{data.manufacturer}} {{data.model}}">
+        </div>
+    </div>
+</section>
+
+<section id="likes">
+    <div class="like-info">
+        <div class="card_left">
+            <div class="card-details">
+                <h1>Likes</h1>
+              
+                <div class="card-like">
+                    <!-- Show the rating of likes, if there are no likes yet, the number must be 0. -->
+                    <p class="PV">Total likes: {{data.likes.length}}</p>
+                </div>
+                  {{#each emails}}
+                  {{this}}
+                  
+                
+                {{else}}
+                <p class="disc">People who liked the post - No one has liked yet.</p>
+                {{/each}}
+             
+            <!-- If there are already people who have cast their like for the post, separate their emails with a comma and a space ", " -->
+                    <!-- <p class="disc">People who liked the post - alex@gmai.com, petar@gmail.com, petq@gmail.com</p>-->
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+

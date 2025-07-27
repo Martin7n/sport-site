@@ -1,0 +1,37 @@
+
+
+
+
+<section id="my-posts">
+    <h1>My Cars Posts</h1>
+
+    <div class="my-container">
+        {{#each data}}
+        <div class="my-card">
+
+            
+        
+            <div class="card-header">
+                <img src="{{image}}" />
+            </div>
+            <div class="card-body">
+                <span class="tag">Top Speed: {{topSpeed}}</span>
+                <h4>
+                    {{manufacturer}} {{model}}
+                </h4>
+                <div class="user">
+                    <div class="user-info">
+                        <h5>Manufacturer: {{manufacturer}}</h5>
+                        <small>Engine: {{engine}}</small>
+                        <a href="/cars/details/{{_id}}" class="details_btn">Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+            {{else}}
+                    <div class="no-posts">
+                        <p class="no-cars">There are no own posts yet....</p>
+                    </div>
+            {{/each}}
+    </div>
+</section>

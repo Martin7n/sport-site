@@ -11,9 +11,11 @@
 /node_modules/
 /package-lock.json
 /yarn.lock
+node_modules
 
 # Environment files
 /.env
+.env
 
 # Angular CLI and build artefacts
 /.angular-cli.json

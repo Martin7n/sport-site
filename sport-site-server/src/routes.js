@@ -1,0 +1,22 @@
+import { Router } from "express";
+import homeController from "../src/controllers/homeController.js"
+import authControler from "../src/controllers/authController.js"
+import complexController from "../src/controllers/complexControler.js"
+import { apiKeyMware } from "./middlewares/api-auth.js";
+const routes = Router();
+
+routes.use(apiKeyMware);
+routes.use(homeController);
+routes.use(authControler);
+routes.use("/", homeController);
+routes.use("/wo", complexController); 
+
+
+// );
+routes.all('*url', (req, res) => {
+    res.render('404'), {layout: false}
+});
+
+console.log("test1")
+
+export default routes;
