@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ComplexService } from '../core/services/complex-service/complex-service';
+import { ComplexService } from '../../../core/services/complex-service/complex-service';
+import { Complex } from '../../../models/complex.model';
+import { ComplexWithImage } from '../../../models/complexWithImg';
 
 @Component({
   selector: 'complex-library-sample',
@@ -10,7 +12,9 @@ import { ComplexService } from '../core/services/complex-service/complex-service
   styleUrls: ['./complex-library-sample.css']
 })
 export class ComplexLibrarySample implements OnInit {
-  data: any;
+    data: ComplexWithImage[] = [];
+
+
   loading = true;
   error = '';
 
@@ -42,7 +46,7 @@ export class ComplexLibrarySample implements OnInit {
 
 ngOnInit(): void {
   this.myDataService.getData().subscribe({
-    next: (res) => {
+    next: (res: Complex[]) => {
       // assign data first
       this.data = res;
 

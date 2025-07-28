@@ -5,11 +5,11 @@ import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-register',
-  templateUrl: './register-component.html',
-  styleUrls: ['./register-component.css'],
+  templateUrl: './register.html',
+  styleUrls: ['./register.css'],
   imports: [ReactiveFormsModule, CommonModule, RouterModule]
 })
-export class RegisterComponent {
+export class Register {
   userForm: FormGroup;
   submitted = false;
 

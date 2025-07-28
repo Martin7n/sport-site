@@ -64,4 +64,12 @@ export class ComplexService {
     // !!!TODO
   }
 
+  generateComplex(): Observable<Complex[]> {
+
+    const endpoint = 'wo/create-complex';
+    const url = this.baseUrl + endpoint;
+
+    return this.http.get<Complex[]>(url, { headers: this.headers });
+  }
+
 } 

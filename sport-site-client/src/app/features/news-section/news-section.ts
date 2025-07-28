@@ -36,14 +36,14 @@ import { CommonModule } from '@angular/common';
 // }
 
 @Component({
-  selector: 'app-news',
+  selector: 'news-section',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './news-component.html',
-  styleUrls: ['./news-component.css'],
+  templateUrl: './news-section.html',
+  styleUrls: ['./news-section.css'],
 })
 
-export class NewsComponent implements OnInit {
+export class NewsSection implements OnInit {
   news: NewsArticle[] = [];
   displayedNews: NewsArticle[] = [];
   loading = true;

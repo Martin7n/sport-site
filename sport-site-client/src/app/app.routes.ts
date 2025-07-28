@@ -5,21 +5,23 @@
 
 import { Routes } from '@angular/router';
 import { HeroSection } from './home/hero-section/hero-section';
-import { RegisterComponent } from './features/register-component/register-component';
-import { LoginComponent } from './features/login-component/login-component';
-import { NewsComponent } from './features/news-component/news-component';
+import { Register } from './features/users/register/register';
+import { Login } from './features/users/login/login';
+import { NewsSection } from './features/news-section/news-section';
 import { About } from './features/about/about';
-import { ComplexLibrarySample } from './complex-library-sample/complex-library-sample';
-import { CreateComplex } from './features/create-complex/create-complex';
+import { ComplexLibrarySample } from './features/complexes/complex-library-sample/complex-library-sample';
+import { CreateComplex } from './features/complexes/create-complex/create-complex';
+import { GenerateComplex } from './features/complexes/generate-complex/generate-complex';
 
 export const routes: Routes = [
   { path: '', component: HeroSection },   // default route
   { path: 'workouts', component: ComplexLibrarySample }, // workout api route
   { path: 'about', component: About }, 
-  { path: 'register', component: RegisterComponent},
-  { path: 'login', component: LoginComponent},
-  {path: 'news', component: NewsComponent},
+  { path: 'register', component: Register},
+  { path: 'login', component: Login},
+  {path: 'news', component: NewsSection},
   {path: "create-complex", component: CreateComplex},
+  {path: "generate-complex", component: GenerateComplex},
     // { path: 'login', component: RegisterComponent},
 
   

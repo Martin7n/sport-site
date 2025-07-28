@@ -6,10 +6,10 @@ import { CommonModule } from '@angular/common';
   selector: 'app-login',
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule],
-  templateUrl: './login-component.html',
-  styleUrls: ['./login-component.css'] // <-- Link the CSS
+  templateUrl: './login.html',
+  styleUrls: ['./login.css'] // <-- Link the CSS
 })
-export class LoginComponent {
+export class Login {
   loginForm: FormGroup;
   submitted = false;
 

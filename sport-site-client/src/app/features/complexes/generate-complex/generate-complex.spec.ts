@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NewsComponent } from './news-component';
+import { GenerateComplex } from './generate-complex';
 
-describe('NewsComponent', () => {
-  let component: NewsComponent;
-  let fixture: ComponentFixture<NewsComponent>;
+describe('GenerateComplex', () => {
+  let component: GenerateComplex;
+  let fixture: ComponentFixture<GenerateComplex>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NewsComponent]
+      imports: [GenerateComplex]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(NewsComponent);
+    fixture = TestBed.createComponent(GenerateComplex);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

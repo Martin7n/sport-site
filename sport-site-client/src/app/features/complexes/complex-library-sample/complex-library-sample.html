@@ -85,7 +85,9 @@
         <div class="flex gap-4">
           <div class="w-24 h-24 flex-shrink-0 overflow-hidden rounded-md">
             <a href="#">
-              <img [src]="item.randomImage" alt="" class="w-full h-full object-cover" />
+              <img [src]="$any(item).randomImage" alt="some" class="w-full h-full object-cover" />
+
+              <!-- <img [src]="item.randomImage" alt="" class="w-full h-full object-cover" /> -->
               <!-- <img src="assets/img/work-9.jpg" alt="" class="w-full h-full object-cover" /> -->
             </a>
           </div>
