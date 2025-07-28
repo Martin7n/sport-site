@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { ComplexService } from './complex-service';
 
 describe('ComplexService', () => {
-  let service: MyDataService;
+  let service: ComplexService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
