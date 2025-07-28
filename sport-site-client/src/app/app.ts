@@ -1,11 +1,11 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { NavigationComponent } from './navigation/navigation.component';
-import {  WorkoutApiComponent } from './workout-api/workout-api.component';
-import { FooterComponent } from './footer/footer.component';
-import {  MainContentComponent } from './main-content/main-content';
-import { RegisterComponent } from './register-component/register-component';
-import { LoginComponent } from './login-component/login-component';
+import { NavigationComponent } from './layout/navigation/navigation.component';
+import {  ComplexLibrarySample } from './complex-library-sample/complex-library-sample';
+import { FooterComponent } from './layout/footer/footer.component';
+import { RegisterComponent } from './features/register-component/register-component';
+import { LoginComponent } from './features/login-component/login-component';
+import { ActionGrid } from './home/action-grid/action-grid';
 
 
 @Component({
@@ -13,10 +13,10 @@ import { LoginComponent } from './login-component/login-component';
   imports: [RouterOutlet, 
            NavigationComponent, 
            FooterComponent, 
-           MainContentComponent,
-           WorkoutApiComponent,
-          RegisterComponent,
-        LoginComponent],
+           ActionGrid,
+           ComplexLibrarySample,
+           RegisterComponent,
+           LoginComponent],
   templateUrl: './app.html',
   styleUrls: ['./app.css']
 })

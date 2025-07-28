@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {  WorkoutApiComponent } from './workout-api.component';
+import {  ComplexLibrarySample } from './complex-library-sample';
 
-describe('WorkoutApiComponent', () => {
-  let component: WorkoutApiComponent;
-  let fixture: ComponentFixture<WorkoutApiComponent>;
+describe('ComplexLibrarySample', () => {
+  let component: ComplexLibrarySample;
+  let fixture: ComponentFixture<ComplexLibrarySample>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [WorkoutApiComponent]
+      imports: [ComplexLibrarySample]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(WorkoutApiComponent);
+    fixture = TestBed.createComponent(ComplexLibrarySample);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

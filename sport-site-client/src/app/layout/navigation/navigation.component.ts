@@ -14,7 +14,7 @@
 
 import { Component, HostListener } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { AuthService } from '../core/services/auth-service/auth.service';
+import { AuthService } from '../../core/services/auth-service/auth.service';
 import { CommonModule, NgIf } from '@angular/common';
 
 

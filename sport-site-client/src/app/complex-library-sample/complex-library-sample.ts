@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MyDataService } from '../core/services/my-data-service/my-data.service';
+import { ComplexService } from '../core/services/complex-service/complex-service';
 
 @Component({
-  selector: 'workout-api',
+  selector: 'complex-library-sample',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './workout-api.component.html',
-  styleUrls: ['./workout-api.component.css']
+  templateUrl: './complex-library-sample.html',
+  styleUrls: ['./complex-library-sample.css']
 })
-export class WorkoutApiComponent implements OnInit {
+export class ComplexLibrarySample implements OnInit {
   data: any;
   loading = true;
   error = '';
 
-  constructor(private myDataService: MyDataService) {}
+  constructor(private myDataService: ComplexService) {}
 
   images = [
   'work-1.jpg',

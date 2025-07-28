@@ -23,7 +23,7 @@ import { environment } from '../../../../enviroments/enviroment';
 // }
 
 
-export class MyDataService {
+export class ComplexService {
   private myApiUrl = environment.myApiUrl + "wo/read-complexes";
 
   constructor(private http: HttpClient) {}

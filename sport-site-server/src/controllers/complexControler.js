@@ -14,8 +14,8 @@ router.get("/add-exercise", async (req, res) => {
 router.get("/create-complex", async (req, res) => {
 
 
-    const createdComnplex = await complexService.createComplex();
-    res.send(createdComnplex)
+    const createdComplex = await complexService.createComplex();
+    res.send(createdComplex)
 
 
 })

@@ -4,20 +4,22 @@
 
 
 import { Routes } from '@angular/router';
-import { HomeSectionComponent } from './home-section-component/home-section-component';
-import { WorkoutApiComponent } from './workout-api/workout-api.component';
-import { About } from './about/about';
-import { RegisterComponent } from './register-component/register-component';
-import { LoginComponent } from './login-component/login-component';
-import { NewsComponent } from './news-component/news-component';
+import { HeroSection } from './home/hero-section/hero-section';
+import { RegisterComponent } from './features/register-component/register-component';
+import { LoginComponent } from './features/login-component/login-component';
+import { NewsComponent } from './features/news-component/news-component';
+import { About } from './features/about/about';
+import { ComplexLibrarySample } from './complex-library-sample/complex-library-sample';
+import { CreateComplex } from './features/create-complex/create-complex';
 
 export const routes: Routes = [
-  { path: '', component: HomeSectionComponent },   // default route
-  { path: 'workouts', component: WorkoutApiComponent }, // workout api route
+  { path: '', component: HeroSection },   // default route
+  { path: 'workouts', component: ComplexLibrarySample }, // workout api route
   { path: 'about', component: About }, 
   { path: 'register', component: RegisterComponent},
   { path: 'login', component: LoginComponent},
   {path: 'news', component: NewsComponent},
+  {path: "create-complex", component: CreateComplex},
     // { path: 'login', component: RegisterComponent},
 
   
