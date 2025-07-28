@@ -1,1 +1,30 @@
-<p>generate-complex works!</p>
+<div class="flex gap-4 p-4 justify-center flex-wrap">
+  <!-- Left Card: Exercises -->
+  <div class="flex-1 bg-white p-4 rounded shadow min-w-[250px] max-w-[350px] break-words">
+    <h2 class="text-xl font-bold mb-2">Exercises</h2>
+    <ul>
+      <li *ngFor="let exercise of generatedComplex?.exercises" class="mb-1">
+        {{ exercise.name }}
+      </li>
+    </ul>
+  </div>
+
+  <!-- Right Card: Complex Info -->
+  <div class="flex-1 bg-white p-4 rounded shadow min-w-[250px] max-w-[350px] break-words">
+    <h2 class="text-xl font-bold mb-2">Complex Info</h2>
+    <p><strong>Type:</strong> {{ generatedComplex?.type }}</p>
+    <p><strong>Equipment:</strong> {{ generatedComplex?.equipment }}</p>
+    <p><strong>Notes:</strong> {{ generatedComplex?.notes || 'No notes yet.' }}</p>
+  </div>
+</div>
+
+<!-- Button outside cards, centered -->
+<div class="flex justify-center mt-6  mb-10">
+  <button
+    (click)="addToFavorites()"
+    class="bg-white text-gray-800 border border-gray-300 px-6 py-2 rounded shadow-sm hover:bg-gray-100 transition"
+  >
+    ADD TO FAVORITES
+  </button>
+  <br>
+</div>

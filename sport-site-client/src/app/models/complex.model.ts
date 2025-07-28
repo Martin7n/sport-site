@@ -18,7 +18,8 @@ export interface Complex {
   _id: string;
   type: string;
   equipment: string;
-  exercises: Exercise[];   
+  exercises: Exercise[]; 
+  notes?: string;   
 //   likes: User[];          // Populated with User objects
   createdAt: string;
   updatedAt: string;

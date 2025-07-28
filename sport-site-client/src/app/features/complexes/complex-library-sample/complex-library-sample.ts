@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ComplexService } from '../../../core/services/complex-service/complex-service';
 import { Complex } from '../../../models/complex.model';
 import { ComplexWithImage } from '../../../models/complexWithImg';
+import { COMPLEX_IMAGES } from '../../../core/constants/images';
 
 @Component({
   selector: 'complex-library-sample',
@@ -12,7 +13,8 @@ import { ComplexWithImage } from '../../../models/complexWithImg';
   styleUrls: ['./complex-library-sample.css']
 })
 export class ComplexLibrarySample implements OnInit {
-    data: ComplexWithImage[] = [];
+    
+  data: ComplexWithImage[] = [];
 
 
   loading = true;
@@ -20,29 +22,7 @@ export class ComplexLibrarySample implements OnInit {
 
   constructor(private myDataService: ComplexService) {}
 
-  images = [
-  'work-1.jpg',
-  'work-12.jpg',
-  'work-2.jpg',
-  'work1 (1).jpg',
-  'work1 (10).jpg',
-  'work1 (11).jpg',
-  'work1 (12).jpg',
-  'work1 (13).jpg',
-  'work1 (14).jpg',
-  'work1 (15).jpg',
-  'work1 (16).jpg',
-  'work1 (17).jpg',
-  'work1 (18).jpg',
-  'work1 (2).jpg',
-  'work1 (3).jpg',
-  'work1 (4).jpg',
-  'work1 (5).jpg',
-  'work1 (6).jpg',
-  'work1 (7).jpg',
-  'work1 (8).jpg',
-  'work1 (9).jpg',
-];
+  images = COMPLEX_IMAGES;
 
 
 

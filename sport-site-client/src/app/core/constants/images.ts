@@ -1,0 +1,25 @@
+
+
+export const COMPLEX_IMAGES  =  [
+  'work-1.jpg',
+  'work-12.jpg',
+  'work-2.jpg',
+  'work1 (1).jpg',
+  'work1 (10).jpg',
+  'work1 (11).jpg',
+  'work1 (12).jpg',
+  'work1 (13).jpg',
+  'work1 (14).jpg',
+  'work1 (15).jpg',
+  'work1 (16).jpg',
+  'work1 (17).jpg',
+  'work1 (18).jpg',
+  'work1 (2).jpg',
+  'work1 (3).jpg',
+  'work1 (4).jpg',
+  'work1 (5).jpg',
+  'work1 (6).jpg',
+  'work1 (7).jpg',
+  'work1 (8).jpg',
+  'work1 (9).jpg',
+];
