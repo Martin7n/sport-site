@@ -44,16 +44,18 @@ export class ComplexLibrarySample implements OnInit {
   'work1 (9).jpg',
 ];
 
+
+
 ngOnInit(): void {
   this.myDataService.getData().subscribe({
-    next: (res: Complex[]) => {
-      // assign data first
-      this.data = res;
-
-      // add randomImage property to each item
-      this.data.forEach((item: any) => {
+    next: (res) => {
+      // transform Complex[] into ComplexWithImage[]
+      this.data = res.map((item) => {
         const index = Math.floor(Math.random() * this.images.length);
-        item.randomImage = `/images/${this.images[index]}`;
+        return {
+          ...item,
+          randomImage: `/images/${this.images[index]}`
+        } as ComplexWithImage;
       });
 
       this.loading = false;
@@ -62,8 +64,29 @@ ngOnInit(): void {
       this.error = 'Error loading data';
       this.loading = false;
     }
-  });}
+  });
 }
+}
+// ngOnInit(): void {
+//   this.myDataService.getData().subscribe({
+//     next: (res: Complex[]) => {
+//       // assign data first
+//       this.data = res;
+
+//       // add randomImage property to each item
+//       this.data.forEach((item: any) => {
+//         const index = Math.floor(Math.random() * this.images.length);
+//         item.randomImage = `/images/${this.images[index]}`;
+//       });
+
+//       this.loading = false;
+//     },
+//     error: (err) => {
+//       this.error = 'Error loading data';
+//       this.loading = false;
+//     }
+//   });}
+// }
 
 //   ngOnInit(): void {
 //     this.myDataService.getData().subscribe({
