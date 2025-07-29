@@ -105,7 +105,7 @@ export class AuthService {
 
       // Set cookie manually
       const cookieName = 'authToken';
-      const expires = new Date(Date.now() + 2 * 60 * 60 * 1000); // 2 hrs
+      const expires = new Date(Date.now() + 4 * 60 * 60 * 1000);  
       document.cookie = `${cookieName}=${res.token}; path=/; expires=${expires.toUTCString()}; SameSite=Lax`;
     })
   );
