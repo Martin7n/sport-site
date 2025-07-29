@@ -20,7 +20,7 @@ export interface Complex {
   equipment: string;
   exercises: Exercise[]; 
   notes?: string;   
-//   likes: User[];          // Populated with User objects
+  likes: User[];          
   createdAt: string;
   updatedAt: string;
 }

@@ -1,11 +1,12 @@
 .login-form {
   max-width: 400px;
-  margin: 2rem auto;
-  padding: 2rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  margin: 40px auto;
+  padding: 24px;
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   font-family: Arial, sans-serif;
-  background-color: #fafafa;
 }
 
 .login-form h2 {
@@ -15,31 +16,38 @@
 }
 
 .form-group {
-  margin-bottom: 1.2rem;
+  margin-bottom: 16px; /* same as register form div */
 }
 
 .form-group label {
   display: block;
+  margin-bottom: 6px;
   font-weight: 600;
-  margin-bottom: 0.3rem;
-  color: #555;
+  color: #333;
 }
 
 .form-group input[type="text"],
 .form-group input[type="password"],
 .form-group input[type="email"] {
   width: 100%;
-  padding: 0.5rem 0.6rem;
+  padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  font-size: 1rem;
+  font-size: 14px;
   box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+/* input invalid styling matching register form */
+.form-group input.ng-invalid.ng-touched,
+.form-group input.ng-invalid.ng-dirty {
+  border-color: #e53935;
 }
 
 .error-messages {
   margin-top: 0.3rem;
-  color: #d9534f; /* bootstrap error red */
-  font-size: 0.85rem;
+  color: #e53935; /* match register form error red */
+  font-size: 12px; /* match register small */
 }
 
 .checkbox-group {
@@ -53,19 +61,20 @@
 
 .btn-submit {
   width: 100%;
-  padding: 0.7rem;
-  background-color: #007bff;
+  padding: 12px;
+  background-color: #1976d2;
   border: none;
   color: white;
-  font-weight: 600;
-  font-size: 1rem;
+  font-weight: bold;
+  font-size: 15px;
   border-radius: 4px;
   cursor: pointer;
+  transition: background-color 0.2s ease;
   margin-top: 1rem;
 }
 
 .btn-submit:hover {
-  background-color: #0056b3;
+  background-color: #1565c0;
 }
 
 .forgot-password {
@@ -74,11 +83,20 @@
 }
 
 .forgot-password a {
-  color: #007bff;
+  color: #1976d2;
   text-decoration: none;
-  font-size: 0.9rem;
+  font-size: 14px;
 }
 
 .forgot-password a:hover {
   text-decoration: underline;
+}
+
+
+/* Responsive: small screens */
+@media (max-width: 480px) {
+  .login-form {
+    margin: 1rem;
+    padding: 1rem;
+  }
 }

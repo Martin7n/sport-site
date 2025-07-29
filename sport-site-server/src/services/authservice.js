@@ -5,6 +5,10 @@ import jwt from "jsonwebtoken";
 
 export default {
 
+    async getUserByEmail(email) {
+    return await User.findOne({ email }, 'username email');
+    },
+
 
 
     async register(userData){
@@ -36,14 +40,13 @@ export default {
 
         const payload = {
             id: user.id,
-            firstName: user.firstName,
-            lastName: user.lastName,
+            username: user.username,
             email: user.email,
         };  
         
         const token = jwt.sign(payload, process.env.JSON_WEBTOKEN_SECRET, { expiresIn: '2h' });
         
-        return token
+        return { token, user };
 
     },
 

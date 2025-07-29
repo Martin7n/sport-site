@@ -13,6 +13,7 @@ import { authMiddleware } from './middlewares/auth-middleware.js';
 dotenv.config();
  
 const app = express();
+app.use(express.json()); 
 app.use(express.static('./src/public'));
 app.use(express.urlencoded());
 
@@ -44,7 +45,8 @@ const dbName = process.env.DB_NAME;
 
 mongooseConnect(dbName);
 app.use(cors({
-  origin: 'http://localhost:4200'
+  origin: 'http://localhost:4200',
+  credentials: true,
 }));
 
 app.use(authMiddleware);

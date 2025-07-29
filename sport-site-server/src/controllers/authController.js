@@ -6,78 +6,62 @@ import { isAuth } from "../middlewares/auth-middleware.js";
 
 const router = Router();
 
-router.get("/register",  (req, res) => {
+router.post("/register",  async (req, res) => {
 
-    const userId = req.user?.id
-    if (userId){
-        return res.redirect("/")
-    }
-    const title = {title: "register"}
-
-    res.render('auth/register', title)
-
-});
-
-
-router.post("/register", async (req, res) => {
-    const userId = req.user?.id
-    if (userId){
-        return res.redirect("/")
-    }
+    try {
     const userData = req.body;
-    const title = {title: "register"}
+    console.log(userData)
 
-    try{
-        await authservice.register(userData);
-        const token = await authservice.login(userData);
-        res.cookie(process.env.AUTH_COOKIE_NAME, token, { httpOnly: true });
+    await authservice.register(userData);
+    const { token, user } = await authservice.login(userData);
 
-        res.redirect("/")
-
+    res.status(201).json({
+      token,
+      username: user.username,
+      email: user.email,
+    });
     } catch (err) {
-        const error = getErrorMessage(err);        
-        return res.render('auth/register',  {error, user: userData, title} );
-
-    };
-
-
+      console.log(err)
+      res.status(400).json({
+      error: getErrorMessage(err),
+    });
+  }
 
 });
 
-
-router.get("/login", async (req, res) => {
-    const userId = req.user?.id
-    if (userId){
-        return res.redirect("/")
-    }
-        res.render('auth/login')
-});
 
 router.post("/login", async (req, res) => {
-    const userId = req.user?.id
-    if (userId){
-        return res.redirect("/")
-    }
+    try {
     const userData = req.body;
 
-    try{
-        const token = await authservice.login(userData);        
-        res.cookie(AUTH_COOKIE_NAME, token, { httpOnly: true });
-        return res.redirect('/');
+    const { token, user } = await authservice.login(userData);
 
+    res.status(200).json({
+      token,
+      username: user.username,
+      email: user.email,
+    });
     } catch (err) {
-        return res.render('auth/login', { error: getErrorMessage(err), user: userData });
-    };
+    res.status(401).json({
+      error: getErrorMessage(err),
+    });
+    }
 });
+
 
 
 router.get("/logout", isAuth, (req, res) => {
-    if (req.user)
-    {   
-        res.clearCookie(AUTH_COOKIE_NAME);
-       
-    }
-     res.redirect('/')
+
+
+    res.clearCookie(process.env.AUTH_COOKIE_NAME, {
+        httpOnly: true,
+        sameSite: 'Lax',
+        path: '/',
+        secure: true,  
+    });
+  
+    res.status(204).end();
+  
 });
 
 

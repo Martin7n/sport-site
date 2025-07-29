@@ -59,22 +59,49 @@ export default {
 
     },
 
-    readFourRandom(filter = {}){
-        const matchStage = {};
+    // readFourRandom(filter = {}){
+    //     const matchStage = {};
 
-    if (filter.type) {
-        matchStage.type = filter.type;
-    }
+    // if (filter.type) {
+    //     matchStage.type = filter.type;
+    // }
 
-    return Complex.aggregate([
-        { $match: matchStage },
-        { $sample: { size: 4 } }
-    ])
+    // return Complex.aggregate([
+    //     { $match: matchStage },
+    //     { $sample: { size: 4 } }
+    // ])
     
-    .then(complexes => Complex.populate(
-        complexes, 
-        { path: 'exercises', select: 'name -_id' }));
-        },
+    // .then(complexes => Complex.populate(
+    //     complexes, 
+    //     { path: 'exercises', select: 'name -_id' }));
+    //     },
+
+    readFourRandom(filter = {}, userId = null) {
+  const matchStage = {};
+
+  if (filter.type) {
+    matchStage.type = filter.type;
+  }
+
+  return Complex.aggregate([
+    { $match: matchStage },
+    { $sample: { size: 4 } }
+  ])
+  .then(complexes =>
+    Complex.populate(complexes, {
+      path: 'exercises',
+      select: 'name -_id'
+    })
+  )
+  .then(complexes =>
+    complexes.map(c => ({
+      ...c,
+      likedByUser: userId ? c.likes.some(id => id.toString() === userId.toString()) : false,
+      likeCount: c.likes.length
+    }))
+  );
+},
+
         
     readComplexes(filter = {}){
             let query = Complex.find({});
@@ -106,7 +133,39 @@ export default {
         return randomCom;
 
 
-    }
+    },
+
+
+    async  toggleLike(complexId, userId) {
+        const complex = await Complex.findById(complexId);
+        if (!complex) throw new Error("Complex not found");
+
+        const index = complex.likes.findIndex(id => id.equals(userId));
+
+        if (index >= 0) {
+            complex.likes.splice(index, 1);
+        } else {
+            complex.likes.push(userId);
+        }
+
+        await complex.save();
+        return {
+            liked: index === -1,
+            likeCount: complex.likes.length
+        };
+    },
+
+    async listComplexes(userId = null) {
+        const complexes = await Complex.find()
+            .populate('exercises') // or keep lean if needed
+            .lean();
+
+        return complexes.map(c => ({
+            ...c,
+            likedByUser: userId ? c.likes.some(id => id.toString() === userId) : false,
+            likeCount: c.likes.length
+  }));
+}
 
 
 };

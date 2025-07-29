@@ -21,5 +21,5 @@ import { ActionGrid } from './home/action-grid/action-grid';
   styleUrls: ['./app.css']
 })
 export class App {
-  protected readonly title = signal('sportsite-v2');
+  protected readonly title = signal('sportsite-v3');
 }

@@ -9,20 +9,6 @@ import { Complex } from '../../../models/complex.model';
 @Injectable({
   providedIn: 'root'
 })
-// export class MyDataService {
-
-  
-
-//     private myApiUrl = environment.myApiUrl + "wo/read-complexes";  
-
-
-//    constructor(private http: HttpClient) {}
-
-//     getData(): Observable<any> {
-//     return this.http.get(this.myApiUrl);
-//   }
-// }
-
 
 export class ComplexService {
   private baseUrl  = environment.myApiUrl;
@@ -42,27 +28,42 @@ export class ComplexService {
 
   getData(): Observable<Complex[]> {
 
-  const endpoint = 'wo/read-complexes';
+  const endpoint = '/wo/read-complexes';
   const url = this.baseUrl + endpoint;
 
   return this.http.get<Complex[]>(url, { headers: this.headers });
 }
 
+
   getComplexDetails(id: string): Observable<Complex[]> {
 
-    const endpoint = 'wo/read-complexes'
+    const endpoint = '/wo/read-complexes'
     const url = this.baseUrl + endpoint;
     
     return this.http.get<Complex[]>(url, { headers: this.headers });
-       // !!!TODO after enhancement of the server-model
-  }
+   }
 
   createComplex(payload: any): Observable<Complex> {
-    const endpoint = 'wo/read-complexes'
+    const endpoint = '/wo/read-complexes'
     const url = this.baseUrl + endpoint;
     return this.http.post<Complex>(url, payload, { headers: this.headers });
-    // !!!TODO
-  }
+   }
+
+
+
+   toggleLike(complexId: string): Observable<{ likedByUser: boolean; likeCount: number }> {
+   const url = `${this.baseUrl}/wo/complexes/toggle-like/${complexId}`;
+    const headers = new HttpHeaders().set('x-api-key', environment.mApiKey);
+
+  return this.http.post<{ likedByUser: boolean; likeCount: number }>(
+    url,
+    null,
+    {
+      headers,
+      withCredentials: true
+    }
+  );
+}
 
   generateComplex(): Observable<Complex> {
 

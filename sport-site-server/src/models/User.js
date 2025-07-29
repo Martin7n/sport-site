@@ -4,8 +4,8 @@ import bcrypt from "bcrypt";
 import { minMaxLenValidator } from "../utils/validators.js";
 
 const userSchema = new Schema({
-    firstName: { type: String, validate: minMaxLenValidator(3),trim: true, },
-    lastName:  { type: String, validate: minMaxLenValidator(3),trim: true, },
+    // firstName: { type: String, validate: minMaxLenValidator(3),trim: true, },
+    // lastName:  { type: String, validate: minMaxLenValidator(3),trim: true, },
     username: { type: String, validate: minMaxLenValidator(2, 20),trim: true, },
     email:{ type: String, validate: minMaxLenValidator(10),
             lowercase: true, match: /\@[a-zA-Z]+.[a-zA-Z]+$/, },

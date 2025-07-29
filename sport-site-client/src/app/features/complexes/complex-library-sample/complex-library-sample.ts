@@ -4,6 +4,7 @@ import { ComplexService } from '../../../core/services/complex-service/complex-s
 import { Complex } from '../../../models/complex.model';
 import { ComplexWithImage } from '../../../models/complexWithImg';
 import { COMPLEX_IMAGES } from '../../../core/constants/images';
+import { AuthService } from '../../../core/services/auth-service/auth.service';
 
 @Component({
   selector: 'complex-library-sample',
@@ -20,9 +21,14 @@ export class ComplexLibrarySample implements OnInit {
   loading = true;
   error = '';
 
-  constructor(private myDataService: ComplexService) {}
+  constructor(private myDataService: ComplexService,
+    private authService: AuthService
+  ) {}
 
   images = COMPLEX_IMAGES;
+   get isLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
+  }
 
 
 
@@ -46,7 +52,23 @@ ngOnInit(): void {
     }
   });
 }
+
+  toggleLike(complex: ComplexWithImage): void {
+    this.myDataService.toggleLike(complex._id).subscribe({
+      next: (res) => {
+        complex.likedByUser = res.likedByUser;
+        complex.likeCount = res.likeCount;
+      },
+      error: (err) => {
+        console.error('Failed to toggle like', err);
+      }
+    });
+  }
 }
+
+
+
+
 // ngOnInit(): void {
 //   this.myDataService.getData().subscribe({
 //     next: (res: Complex[]) => {
