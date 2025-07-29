@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../enviroments/enviroment';
 import { Complex } from '../../../models/complex.model';
+import { ComplexWithImage } from '../../../models/complexWithImg';
 
 
 
@@ -30,24 +31,26 @@ export class ComplexService {
 
   const endpoint = '/wo/read-complexes';
   const url = this.baseUrl + endpoint;
+  console.log('API key sent:', environment.mApiKey);
+
 
   return this.http.get<Complex[]>(url, { headers: this.headers });
 }
 
 
-  getComplexDetails(id: string): Observable<Complex[]> {
+  // getComplexDetails(id: string): Observable<Complex[]> {
 
-    const endpoint = '/wo/read-complexes'
-    const url = this.baseUrl + endpoint;
+  //   const endpoint = '/wo/read-complexes'
+  //   const url = this.baseUrl + endpoint;
     
-    return this.http.get<Complex[]>(url, { headers: this.headers });
-   }
+  //   return this.http.get<Complex[]>(url, { headers: this.headers });
+  //  }
 
-  createComplex(payload: any): Observable<Complex> {
-    const endpoint = '/wo/read-complexes'
-    const url = this.baseUrl + endpoint;
-    return this.http.post<Complex>(url, payload, { headers: this.headers });
-   }
+  // createComplex(payload: any): Observable<Complex> {
+  //   const endpoint = '/wo/read-complexes'
+  //   const url = this.baseUrl + endpoint;
+  //   return this.http.post<Complex>(url, payload, { headers: this.headers });
+  //  }
 
 
 
@@ -65,13 +68,16 @@ export class ComplexService {
   );
 }
 
-  getLikedComplexes(): Observable<Complex[]> {
-    const url = `${this.baseUrl}/user/liked-complexes`;
-    return this.http.get<Complex[]>(url, {
-      headers: this.headers,
-      withCredentials: true,
+  getLikedComplexes(): Observable<ComplexWithImage[]> {
+  const endpoint = '/wo/profile';
+  const headers = new HttpHeaders().set('x-api-key', environment.mApiKey);
+
+  const url = this.baseUrl + endpoint;
+  return this.http.get<ComplexWithImage[]>(url,  {
+      headers,
+      withCredentials: true
     });
-  }
+}
 
 
   generateComplex(): Observable<Complex> {

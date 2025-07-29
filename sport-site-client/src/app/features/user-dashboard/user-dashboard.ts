@@ -14,6 +14,7 @@ import { AuthService } from '../../core/services/auth-service/auth.service';
   styleUrls: ['./user-dashboard.css'],
 })
 export class UserDashboard implements OnInit {
+  
   likedData: ComplexWithImage[] = [];
   loading = true;
   error = '';
@@ -53,4 +54,8 @@ export class UserDashboard implements OnInit {
       },
     });
   }
+
+  scrollToTop(): void {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 }

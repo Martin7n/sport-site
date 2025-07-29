@@ -1,6 +1,7 @@
 import { Router } from "express";
 import complexService from "../services/complexService.js";
 import Complex from "../models/Complex.js";
+import { isAuth } from "../middlewares/auth-middleware.js";
 
 
 const router = Router();
@@ -58,7 +59,7 @@ router.get("list-complexes", async(req, res) =>{
 
 router.post('/complexes/toggle-like/:id', async (req, res) => {
   try {
-    const userId = req.user?.id;  // make sure user is authenticated
+    const userId = req.user?.id;   
     const complexId = req.params.id;
 
     if (!userId) return res.status(401).json({ error: 'Unauthorized' });
@@ -88,6 +89,34 @@ router.post('/complexes/toggle-like/:id', async (req, res) => {
     res.status(500).json({ error: 'Failed to toggle like' });
   }
 }),
+
+    router.get('/profile',  async (req, res) => {
+        
+        const userId = req.user?.id;
+        console.log(userId);
+
+
+        if (!userId) {
+            return res.status(401).json({ message: '>>  Unauthorized: No user ID' });
+        }
+
+
+    try {
+        const likedComplexes = await Complex.find({ likes: userId }).populate('exercises').exec();
+        console.log(likedComplexes)
+        res.json(likedComplexes);
+
+    } catch (err) {
+            console.log("AAAAAAAAAAAA")
+
+
+        console.error('Error fetching liked complexes:', err);  
+        res.status(500).json({ message: 'Server error' });
+    }
+})
+
+
+
 
 )
 
