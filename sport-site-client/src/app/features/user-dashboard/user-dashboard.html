@@ -72,9 +72,27 @@
   <p class="text-gray-700">Created complexes will be shown here soon.</p>
 </div>
 
-<!-- Generate New Placeholder -->
+<!-- Generate Tab -->
 <div *ngIf="selectedTab === 'generate'">
-  <p class="text-gray-700">Feature to generate new workout is under construction.</p>
+  <h2>Generated Complex</h2>
+  <div *ngIf="loading">Loading...</div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+
+  <div *ngIf="generatedComplex" class="complex-card">
+    <img [src]="generatedComplex.randomImage" alt="Complex Image" class="complex-image" />
+    <div class="complex-info">
+      <h3>{{ generatedComplex.type }}</h3>
+      <p>Equipment: {{ generatedComplex.equipment }}</p>
+      <ul>
+        <li *ngFor="let ex of generatedComplex.exercises">{{ ex.name }}</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Created tab placeholder -->
+<div *ngIf="selectedTab === 'created'">
+  <p>Created complexes feature coming soon...</p>
 </div>
 
 <button

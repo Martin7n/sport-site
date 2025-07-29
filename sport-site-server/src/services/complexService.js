@@ -19,7 +19,7 @@ export default {
     },
 
 
-    async createComplex(filter = {}){
+    async createComplex(ownerId = null){
 
         const erx = await Exercise.find()
         const fst = await Exercise.aggregate([
@@ -44,7 +44,8 @@ export default {
             {
                 type: "first",
                 equipment: "all",
-                exercises: [fst[0]._id, snd[0]._id, trd[0]._id, condition[0]._id]
+                exercises: [fst[0]._id, snd[0]._id, trd[0]._id, condition[0]._id],
+                owner: ownerId
             }
         )
 

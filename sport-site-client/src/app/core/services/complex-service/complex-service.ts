@@ -82,10 +82,12 @@ export class ComplexService {
 
   generateComplex(): Observable<Complex> {
 
-    const endpoint = 'wo/create-complex';
+    const endpoint = '/wo/create-complex';
     const url = this.baseUrl + endpoint;
 
-    return this.http.get<Complex>(url, { headers: this.headers });
+    return this.http.get<Complex>(url, { 
+      headers: this.headers,  withCredentials: true 
+    });
   }
 
 } 

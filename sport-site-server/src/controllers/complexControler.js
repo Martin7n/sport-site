@@ -14,10 +14,19 @@ router.get("/add-exercise", async (req, res) => {
 })
 
 router.get("/create-complex", async (req, res) => {
+  console.log("ETST")
+  
+    try {
+      const userId = req.user?.id || null; 
 
+      const createdComplex = await complexService.createComplex(userId);
+      console.log(`waaaaaaaaaaaaahat ${createdComplex}`)
+      res.json(createdComplex);
+      } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Server error creating complex' });
+    }
 
-    const createdComplex = await complexService.createComplex();
-    res.send(createdComplex)
 
 })
 

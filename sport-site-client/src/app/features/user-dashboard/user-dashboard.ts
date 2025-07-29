@@ -6,6 +6,9 @@ import { COMPLEX_IMAGES } from '../../core/constants/images';
 import { AuthService } from '../../core/services/auth-service/auth.service';
 
 
+
+
+
 @Component({
   selector: 'user-dashboard',
   standalone: true,
@@ -14,64 +17,19 @@ import { AuthService } from '../../core/services/auth-service/auth.service';
   styleUrls: ['./user-dashboard.css'],
 })
 export class UserDashboard implements OnInit {
-  
-//   likedData: ComplexWithImage[] = [];
-//   loading = true;
-//   error = '';
 
-//   constructor(
-//     private complexService: ComplexService,
-//     private authService: AuthService
-//   ) {}
-
-//   images = COMPLEX_IMAGES;
-
-//   get isLoggedIn(): boolean {
-//     return this.authService.isLoggedIn();
-//   }
-
-//   ngOnInit(): void {
-//     if (!this.isLoggedIn) {
-//       this.error = 'You must be logged in to view liked complexes.';
-//       this.loading = false;
-//       return;
-//     }
-
-//     this.complexService.getLikedComplexes().subscribe({
-//       next: (res) => {
-//         this.likedData = res.map((item) => {
-//           const index = Math.floor(Math.random() * this.images.length);
-//           return {
-//             ...item,
-//             randomImage: `/images/${this.images[index]}`,
-//           } as ComplexWithImage;
-//         });
-//         this.loading = false;
-//       },
-//       error: (err) => {
-//         this.error = 'Failed to load liked complexes';
-//         this.loading = false;
-//       },
-//     });
-//   }
-
-//   scrollToTop(): void {
-//   window.scrollTo({ top: 0, behavior: 'smooth' });
-// }
-// }
-
- selectedTab: 'liked' | 'created' | 'generate' = 'liked';
-
+  selectedTab: 'liked' | 'created' | 'generate' = 'liked';
   likedData: ComplexWithImage[] = [];
+  generatedComplex: ComplexWithImage | null = null;
+
   loading = false;
   error = '';
+  images = COMPLEX_IMAGES;
 
   constructor(
     private complexService: ComplexService,
     private authService: AuthService
   ) {}
-
-  images = COMPLEX_IMAGES;
 
   get isLoggedIn(): boolean {
     return this.authService.isLoggedIn();
@@ -83,12 +41,11 @@ export class UserDashboard implements OnInit {
       return;
     }
 
-    // Load default tab
     this.loadTabData(this.selectedTab);
   }
 
   selectTab(tab: 'liked' | 'created' | 'generate'): void {
-    this.selectedTab = tab;
+    this.loadTabData(tab);
   }
 
   loadTabData(tab: 'liked' | 'created' | 'generate') {
@@ -104,15 +61,10 @@ export class UserDashboard implements OnInit {
             this.loading = false;
             return;
           }
-
-          this.likedData = res.map((item) => {
+          this.likedData = res.map(item => {
             const index = Math.floor(Math.random() * this.images.length);
-            return {
-              ...item,
-              randomImage: `/images/${this.images[index]}`
-            } as ComplexWithImage;
+            return { ...item, randomImage: `/images/${this.images[index]}` } as ComplexWithImage;
           });
-
           this.loading = false;
         },
         error: () => {
@@ -120,22 +72,56 @@ export class UserDashboard implements OnInit {
           this.loading = false;
         }
       });
+    } else if (tab === 'generate') {
+      this.loading = true;
+      this.error = '';
+      this.generatedComplex = null;
+      this.complexService.generateComplex().subscribe({
+        next: (complex) => {
+          const index = Math.floor(Math.random() * this.images.length);
+          this.generatedComplex = {
+            ...complex,
+            randomImage: `/images/${this.images[index]}`
+          } as ComplexWithImage;
+          this.loading = false;
+        },
+        error: () => {
+          this.error = 'Failed to generate new complex.';
+          this.loading = false;
+        }
+      });
     }
-
-    // Later: handle 'created' and 'generate' logic if needed
   }
 
   removeFromLiked(complex: ComplexWithImage): void {
-  this.complexService.toggleLike(complex._id).subscribe({
-    next: (res) => {
-      // Remove the complex from likedData locally
-      this.likedData = this.likedData.filter(c => c._id !== complex._id);
-    },
-    error: (err) => {
-      console.error('Failed to remove from liked list', err);
-    }
-  });
-}
+    this.complexService.toggleLike(complex._id).subscribe({
+      next: () => {
+        this.likedData = this.likedData.filter(c => c._id !== complex._id);
+      },
+      error: (err) => {
+        console.error('Failed to remove from liked list', err);
+      }
+    });
+  }
+
+  generateNewComplex(): void {
+    this.loading = true;
+    this.error = '';
+    this.complexService.generateComplex().subscribe({
+      next: (complex) => {
+        const index = Math.floor(Math.random() * this.images.length);
+        this.generatedComplex = {
+          ...complex,
+          randomImage: `/images/${this.images[index]}`
+        };
+        this.loading = false;
+      },
+      error: () => {
+        this.error = 'Failed to generate complex.';
+        this.loading = false;
+      }
+    });
+  }
 
   scrollToTop(): void {
     window.scrollTo({ top: 0, behavior: 'smooth' });

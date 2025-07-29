@@ -17,7 +17,7 @@ const complexSchema = new Schema({
         //              a   }
         // },
         likes:          [{ type:Types.ObjectId, ref: "User"}],
-        // owner:          { type: Types.ObjectId, ref: "User", required: true }
+        owner:          { type: Types.ObjectId, ref: "User", required: false }
     
     },
           {
