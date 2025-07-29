@@ -8,18 +8,57 @@ import { Login } from './features/users/login/login';
 import { ActionGrid } from './home/action-grid/action-grid';
 
 
+// @Component({
+//   selector: 'app-root',
+//   imports: [RouterOutlet, 
+//            NavigationComponent, 
+//            FooterComponent, 
+//            ActionGrid,
+//            ComplexLibrarySample,
+//            Register,
+//            Login],
+//   templateUrl: './app.html',
+//   styleUrls: ['./app.css']
+// })
+// export class App {
+//   protected readonly title = signal('sportsite-v3');
+
+  
+// }
+
+
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, 
-           NavigationComponent, 
-           FooterComponent, 
-           ActionGrid,
-           ComplexLibrarySample,
-           Register,
-           Login],
+  imports: [
+    RouterOutlet,
+    NavigationComponent,
+    FooterComponent,
+    ActionGrid,
+    ComplexLibrarySample,
+    Register,
+    Login,
+  ],
   templateUrl: './app.html',
-  styleUrls: ['./app.css']
+  styleUrls: ['./app.css'],
 })
-export class App {
+export class App implements OnInit, OnDestroy {
   protected readonly title = signal('sportsite-v3');
+
+  constructor(private authService: AuthService, private router: Router) {}
+
+  private storageListener = (event: StorageEvent) => {
+    if (event.key === 'logout') {
+      // Another tab logged out
+      this.authService.logout(); // Clear auth state locally
+      this.router.navigate(['/login']); // Redirect or update UI
+    }
+  };
+
+  ngOnInit(): void {
+    window.addEventListener('storage', this.storageListener);
+  }
+
+  ngOnDestroy(): void {
+    window.removeEventListener('storage', this.storageListener);
+  }
 }

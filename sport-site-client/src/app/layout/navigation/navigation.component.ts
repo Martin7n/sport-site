@@ -1,17 +1,3 @@
-// import { Component } from '@angular/core';
-
-// @Component({
-//   selector: 'app-navigation',
-//   standalone: true,
-//   imports: [],
-//   templateUrl: './navigation.component.html',
-//   styleUrl: './navigation.component.css'
-// })
-// export class NavigationComponent {
-
-// }
-
-
 import { Component, HostListener } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../core/services/auth-service/auth.service';
@@ -31,7 +17,11 @@ import { CommonModule, NgIf } from '@angular/common';
   export class NavigationComponent {
 
     showMenu = false;
-  constructor(private router: Router, public auth: AuthService) {}
+    constructor(private router: Router, public auth: AuthService) {}
+
+    get isLoggedIn(): boolean {
+    return this.auth.isLoggedIn();
+  }
 
   goToTestApi(): void {
     this.router.navigate(['/workouts']);
@@ -49,7 +39,7 @@ import { CommonModule, NgIf } from '@angular/common';
 
 
    @HostListener('document:click', ['$event'])
-  handleClickOutside(event: MouseEvent): void {
+    handleClickOutside(event: MouseEvent): void {
     const target = event.target as HTMLElement;
     if (!target.closest('.user-menu')) {
       this.showMenu = false;

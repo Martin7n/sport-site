@@ -112,7 +112,7 @@ export class AuthService {
 }
 
   isLoggedIn(): boolean {
-    return !!this.getToken();
+    return !!(localStorage.getItem('authToken') || sessionStorage.getItem('authToken'));
   }
 
   getUsername(): string | null {
@@ -124,6 +124,9 @@ export class AuthService {
     localStorage.removeItem('username');
     sessionStorage.removeItem('authToken');
     sessionStorage.removeItem('username');
+
+     localStorage.setItem('logout', Date.now().toString());
+    localStorage.removeItem('logout');  
   }
 
   private saveAuthDataToLocal(token: string, username: string) {
