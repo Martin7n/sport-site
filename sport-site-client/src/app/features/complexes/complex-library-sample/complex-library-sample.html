@@ -86,16 +86,18 @@
 
 
             <!-- likes functionality -->
-              <button 
-  *ngIf="isLoggedIn" 
-  (click)="toggleLike(item)" 
-  [class.liked]="item.likedByUser"
-  aria-label="Toggle like"
->
-  {{ item.likedByUser ? '★' : '☆' }} Like ({{ item.likeCount }})
-</button>
-    <!-- likes functionality -->
+            <div class="mb-2">
 
+              <button *ngIf="isLoggedIn" 
+              (click)="toggleLike(item)" 
+              [class.liked]="item.likedByUser"
+              aria-label="Toggle like"
+      >
+              {{ item.likedByUser ? '★ Liked' : '☆ Like' }} ({{ item.likeCount }})
+              </button>
+            </div>
+    <!-- likes functionality -->
+              
 
         <div class="flex gap-4">
           <div class="w-24 h-24 flex-shrink-0 overflow-hidden rounded-md">
