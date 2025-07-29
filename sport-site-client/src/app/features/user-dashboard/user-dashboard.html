@@ -1,0 +1,35 @@
+<div class="wrapper">
+  <div *ngIf="loading">Loading...</div>
+  <div *ngIf="error" class="text-red-600">{{ error }}</div>
+
+  <div *ngIf="!loading && likedData.length > 0">
+    <h3 class="text-xl font-semibold mb-4 text-white">Your Liked Complexes</h3>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <div *ngFor="let item of likedData" class="bg-white rounded-lg shadow p-4">
+        <div class="flex gap-4">
+          <div class="w-24 h-24 overflow-hidden rounded-md">
+            <img [src]="item.randomImage" alt="Image" class="w-full h-full object-cover" />
+          </div>
+
+          <div class="flex-1">
+            <h4 class="text-lg font-bold text-gray-800">{{ item._id }}</h4>
+            <p class="text-sm"><strong>Type:</strong> {{ item.type }}</p>
+            <p class="text-sm"><strong>Equipment:</strong> {{ item.equipment }}</p>
+
+            <div class="mt-2">
+              <p class="font-medium">Exercises:</p>
+              <ul class="list-disc list-inside text-sm text-gray-700">
+                <li *ngFor="let ex of item.exercises">{{ ex.name }}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!loading && likedData.length === 0" class="text-gray-400">
+    No liked complexes yet.
+  </div>
+</div>

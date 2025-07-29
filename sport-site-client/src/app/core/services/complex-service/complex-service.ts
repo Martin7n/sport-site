@@ -65,6 +65,15 @@ export class ComplexService {
   );
 }
 
+  getLikedComplexes(): Observable<Complex[]> {
+    const url = `${this.baseUrl}/user/liked-complexes`;
+    return this.http.get<Complex[]>(url, {
+      headers: this.headers,
+      withCredentials: true,
+    });
+  }
+
+
   generateComplex(): Observable<Complex> {
 
     const endpoint = 'wo/create-complex';
