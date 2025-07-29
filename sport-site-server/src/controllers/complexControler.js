@@ -102,13 +102,19 @@ router.post('/complexes/toggle-like/:id', async (req, res) => {
 
 
     try {
-        const likedComplexes = await Complex.find({ likes: userId }).populate('exercises').exec();
-        console.log(likedComplexes)
-        res.json(likedComplexes);
+        const likedComplexes = await Complex.find({ likes: userId }).populate('exercises').lean();
+
+        const complexesWithLikeCount = likedComplexes.map(c => ({
+            ...c,
+            likeCount: c.likes.length,
+          }));
+
+      res.json(complexesWithLikeCount);
+        // console.log(likedComplexes)
+        // res.json(likedComplexes);
 
     } catch (err) {
-            console.log("AAAAAAAAAAAA")
-
+ 
 
         console.error('Error fetching liked complexes:', err);  
         res.status(500).json({ message: 'Server error' });

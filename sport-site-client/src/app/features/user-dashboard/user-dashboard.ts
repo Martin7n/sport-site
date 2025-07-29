@@ -90,7 +90,7 @@ export class UserDashboard implements OnInit {
   selectTab(tab: 'liked' | 'created' | 'generate'): void {
     this.selectedTab = tab;
   }
-  
+
   loadTabData(tab: 'liked' | 'created' | 'generate') {
     this.selectedTab = tab;
 
@@ -124,6 +124,18 @@ export class UserDashboard implements OnInit {
 
     // Later: handle 'created' and 'generate' logic if needed
   }
+
+  removeFromLiked(complex: ComplexWithImage): void {
+  this.complexService.toggleLike(complex._id).subscribe({
+    next: (res) => {
+      // Remove the complex from likedData locally
+      this.likedData = this.likedData.filter(c => c._id !== complex._id);
+    },
+    error: (err) => {
+      console.error('Failed to remove from liked list', err);
+    }
+  });
+}
 
   scrollToTop(): void {
     window.scrollTo({ top: 0, behavior: 'smooth' });

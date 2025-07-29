@@ -40,6 +40,7 @@
 
   <div *ngIf="!loading && !error" class="grid grid-cols-1 sm:grid-cols-2 gap-6">
     <div *ngFor="let item of likedData" class="bg-white rounded-lg shadow p-4">
+      
       <div class="flex gap-4">
         <img [src]="item.randomImage" class="w-24 h-24 object-cover rounded-md" />
         <div>
@@ -49,8 +50,13 @@
           <ul>
             <li *ngFor="let ex of item.exercises">{{ ex.name }}</li>
           </ul>
+          
         </div>
+        
       </div>
+       <p>Likes: {{ item.likeCount }}</p>
+          <button (click)="removeFromLiked(item)">Remove</button>
+
     </div>
   </div>
 
