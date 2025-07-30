@@ -13,14 +13,13 @@ router.get("/add-exercise", async (req, res) => {
     res.json(newEx)
 })
 
-router.get("/create-complex", async (req, res) => {
+router.get("/create-complex", isAuth, async (req, res) => {
   console.log("ETST")
   
     try {
       const userId = req.user?.id || null; 
 
       const createdComplex = await complexService.createComplex(userId);
-      console.log(`waaaaaaaaaaaaahat ${createdComplex}`)
       res.json(createdComplex);
       } catch (err) {
         console.error(err);
@@ -99,7 +98,8 @@ router.post('/complexes/toggle-like/:id', async (req, res) => {
   }
 }),
 
-    router.get('/profile',  async (req, res) => {
+  
+  router.get('/profile',  isAuth, async (req, res) => {
         
         const userId = req.user?.id;
         console.log(userId);

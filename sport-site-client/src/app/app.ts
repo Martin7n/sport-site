@@ -9,25 +9,6 @@ import { ActionGrid } from './home/action-grid/action-grid';
 import { AuthService } from './core/services/auth-service/auth.service';
 
 
-// @Component({
-//   selector: 'app-root',
-//   imports: [RouterOutlet, 
-//            NavigationComponent, 
-//            FooterComponent, 
-//            ActionGrid,
-//            ComplexLibrarySample,
-//            Register,
-//            Login],
-//   templateUrl: './app.html',
-//   styleUrls: ['./app.css']
-// })
-// export class App {
-//   protected readonly title = signal('sportsite-v3');
-
-  
-// }
-
-
 @Component({
   selector: 'app-root',
   imports: [
@@ -49,9 +30,10 @@ export class App implements OnInit, OnDestroy {
 
   private storageListener = (event: StorageEvent) => {
     if (event.key === 'logout') {
-      // Another tab logged out
-      this.authService.logout(); // Clear auth state locally
-      this.router.navigate(['/login']); // Redirect or update UI
+        console.log('[Sync] Logout triggered by another tab');
+        sessionStorage.clear();
+      //  this.authService.logout();  
+      this.router.navigate(['/login']);  
     }
   };
 

@@ -13,13 +13,14 @@ import { ComplexLibrarySample } from './features/complexes/complex-library-sampl
 import { CreateComplex } from './features/complexes/create-complex/create-complex';
 import { GenerateComplex } from './features/complexes/generate-complex/generate-complex';
 import { authGuard } from './core/guards/auth.guard';
+import { guestGuard } from './core/guards/guest.guard';
 
 export const routes: Routes = [
   { path: '', component: HeroSection },   // default route
   { path: 'workouts', component: ComplexLibrarySample }, // workout api route
   { path: 'about', component: About }, 
-  { path: 'register', component: Register},
-  { path: 'login', component: Login},
+  { path: 'register', component: Register, canActivate: [guestGuard] },
+  { path: 'login', component: Login, canActivate: [guestGuard] },
   {path: 'news', component: NewsSection},
   {path: "create-complex", component: CreateComplex},
   {path: "generate-complex", component: GenerateComplex},

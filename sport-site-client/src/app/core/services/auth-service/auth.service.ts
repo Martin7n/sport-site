@@ -100,13 +100,15 @@ export class AuthService {
       if (rememberMe) {
         this.saveAuthDataToLocal(res.token, res.username);
       } else {
+        this.saveAuthDataToLocal(res.token, res.username);
+
         this.saveAuthDataToSession(res.token, res.username);
       }
 
       // Set cookie manually
-      const cookieName = 'authToken';
-      const expires = new Date(Date.now() + 4 * 60 * 60 * 1000);  
-      document.cookie = `${cookieName}=${res.token}; path=/; expires=${expires.toUTCString()}; SameSite=Lax`;
+      // const cookieName = 'authToken';
+      // const expires = new Date(Date.now() + 4 * 60 * 60 * 1000);  
+      // document.cookie = `${cookieName}=${res.token}; path=/; expires=${expires.toUTCString()}; SameSite=Lax`;
     })
   );
 }
@@ -122,10 +124,10 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem('authToken');
     localStorage.removeItem('username');
-    sessionStorage.removeItem('authToken');
-    sessionStorage.removeItem('username');
+    // sessionStorage.removeItem('authToken');
+    // sessionStorage.removeItem('username');
 
-     localStorage.setItem('logout', Date.now().toString());
+    localStorage.setItem('logout', Date.now().toString());
     localStorage.removeItem('logout');  
   }
 
@@ -135,11 +137,12 @@ export class AuthService {
   }
 
   private saveAuthDataToSession(token: string, username: string) {
-    sessionStorage.setItem('authToken', token);
-    sessionStorage.setItem('username', username);
+    // sessionStorage.setItem('authToken', token);
+    // sessionStorage.setItem('username', username);
   }
 
   getToken(): string | null {
-    return localStorage.getItem('authToken') || sessionStorage.getItem('authToken');
+    return localStorage.getItem('authToken') 
+    
   }
 }
