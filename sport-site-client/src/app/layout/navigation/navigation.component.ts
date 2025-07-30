@@ -28,9 +28,10 @@ import { CommonModule, NgIf } from '@angular/common';
   }
 
    logout() {
+
     this.auth.logout();
-    this.router.navigate(['/login']);
-  }
+    window.location.href = '/';
+    }
 
 
     toggleMenu(): void {

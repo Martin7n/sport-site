@@ -26,11 +26,42 @@ export const authMiddleware = (req, res, next) => {
    
 }
 
-export const isAuth = (req, res, next) => {
-    if (!req.user){
+// export const isAuth = (req, res, next) => {
+//     if (!req.user){
           
-        return res.redirect('/login');
-    }
-    next();
-};
+//         console.log("fail")
+//         return res.redirect('/login');
+//     }
+//     next();
+// };
 
+
+export const isAuth = (req, res, next) => {
+    console.log(req.cookies.authToken);
+    console.log(process.env.AUTH_COOKIE_NAME)
+    console.log(req.cookies[process.env.AUTH_COOKIE_NAME]);
+
+
+    const token = req.cookies[process.env.AUTH_COOKIE_NAME];
+
+    if (!token) {
+    console.log('No auth token in cookies');
+
+    return res.status(401).json({ message: 'Unauthorized' });
+    }
+
+    try {
+    const decoded = jwt.verify(token, process.env.JSON_WEBTOKEN_SECRET);
+    console.log(decoded)
+
+    req.user = {
+      id: decoded.id,
+      email: decoded.email,
+      username: decoded.username
+    };
+
+    next();
+    } catch (err) {
+        console.log(err)
+        return res.status(401).json({ message: 'Unauthorized: Invalid token' });
+    }};

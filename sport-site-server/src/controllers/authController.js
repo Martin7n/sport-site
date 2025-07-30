@@ -30,35 +30,63 @@ router.post("/register",  async (req, res) => {
 });
 
 
-router.post("/login", async (req, res) => {
-    try {
-    const userData = req.body;
+// router.post("/login", async (req, res) => {
+//     try {
+//     const userData = req.body;
 
+//     const { token, user } = await authservice.login(userData);
+
+//     res.status(200).json({
+//       token,
+//       username: user.username,
+//       email: user.email,
+//       });
+//       } catch (err) {
+//       res.status(401).json({
+//         error: getErrorMessage(err),
+//       });
+//     }
+// });
+
+
+router.post("/login", async (req, res) => {
+  try {
+    const userData = req.body;
     const { token, user } = await authservice.login(userData);
+
+     res.cookie('authToken', token, {
+      httpOnly: true,
+      secure: false,         
+      sameSite: 'Lax',
+      maxAge: 1000 * 60 * 60 * 4, // 4 hours
+      path: '/',
+    });
 
     res.status(200).json({
       token,
       username: user.username,
       email: user.email,
     });
-    } catch (err) {
+  } catch (err) {
     res.status(401).json({
       error: getErrorMessage(err),
     });
-    }
+  }
 });
 
 
-
-router.get("/logout", isAuth, (req, res) => {
+router.get("/logout",  (req, res) => {
 
 
     res.clearCookie(process.env.AUTH_COOKIE_NAME, {
-        httpOnly: true,
-        sameSite: 'Lax',
+        httpOnly: false,
+        sameSite: 'None',
+        // sameSite: 'Lax',
         path: '/',
         secure: true,  
     });
+
+    // console.log("CLEARED")
   
     res.status(204).end();
   

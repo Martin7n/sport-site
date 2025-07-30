@@ -19,7 +19,10 @@ export class GenerateComplex implements OnInit {
   constructor(private complexService: ComplexService) {}
 
   ngOnInit(): void {
+     
     this.loadGeneratedComplex();
+
+
   }
 
   loadGeneratedComplex(): void {

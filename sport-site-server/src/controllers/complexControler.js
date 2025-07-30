@@ -13,11 +13,12 @@ router.get("/add-exercise", async (req, res) => {
     res.json(newEx)
 })
 
-router.get("/create-complex", isAuth, async (req, res) => {
-  console.log("ETST")
-  
+router.get("/create-complex",  isAuth, async (req, res) => {
+          console.log(req.user?.id)
+
     try {
       const userId = req.user?.id || null; 
+      //not sure yet if that will be & 'public function'...
 
       const createdComplex = await complexService.createComplex(userId);
       res.json(createdComplex);

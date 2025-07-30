@@ -5,8 +5,8 @@ import complexController from "../src/controllers/complexControler.js"
 import { apiKeyMware } from "./middlewares/api-auth.js";
 const routes = Router();
 
-routes.use(apiKeyMware);
 routes.use(homeController);
+routes.use(apiKeyMware);
 routes.use("/", homeController);
 routes.use("/auth", authControler);
 routes.use("/wo", complexController); 

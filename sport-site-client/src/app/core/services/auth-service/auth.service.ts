@@ -2,11 +2,12 @@
 // src/app/core/services/auth-service/auth.service.ts
 
 
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { environment } from '../../../../enviroments/enviroment';
+import {  Router } from '@angular/router';
 
 // export interface AuthResponse {
 //   token: string;
@@ -65,11 +66,18 @@ export interface AuthResponse {
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
+    private loggedIn = signal<boolean>(this.checkLoggedIn());
+    isLoggedInSignal = this.loggedIn;
+
   private readonly apiUrl = environment.myApiUrl + '/auth';
   private headers = new HttpHeaders().set('x-api-key', environment.mApiKey);
 
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router ) {}
+
+  private checkLoggedIn(): boolean {
+    return !!localStorage.getItem('authToken');
+  }
 
   register(userData: any): Observable<AuthResponse> {
   return this.http.post<AuthResponse>(
@@ -122,14 +130,39 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem('authToken');
-    localStorage.removeItem('username');
+    // localStorage.removeItem('authToken');
+    // localStorage.removeItem('username');
     // sessionStorage.removeItem('authToken');
     // sessionStorage.removeItem('username');
 
-    localStorage.setItem('logout', Date.now().toString());
-    localStorage.removeItem('logout');  
+    // localStorage.setItem('logout', Date.now().toString());
+    // localStorage.removeItem('logout');
+
+    
+    //    this.router.navigate(['/login']).then(() => {
+    // console.log('Navigated to login');});
+     this.router.navigate(['/login'])
+
+     this.http.get(`${this.apiUrl}/logout`, {
+      headers: this.headers,
+      withCredentials: true,
+      }).subscribe({
+        next: () => {
+          this.clearLocalSessionData();
+        },
+        error: (err) => {
+          console.error('[Logout] Failed to contact backend:', err);
+        }
+  });
+  
   }
+
+  private clearLocalSessionData(): void {
+      localStorage.removeItem('authToken');
+      localStorage.removeItem('username');
+      sessionStorage.removeItem('authToken');
+      sessionStorage.removeItem('username');
+}
 
   private saveAuthDataToLocal(token: string, username: string) {
     localStorage.setItem('authToken', token);

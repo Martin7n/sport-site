@@ -15,6 +15,8 @@ export class ComplexService {
   private baseUrl  = environment.myApiUrl;
   private headers = new HttpHeaders().set('x-api-key', environment.mApiKey);
 
+  
+
 
   constructor(private http: HttpClient) {}
 
@@ -84,6 +86,7 @@ export class ComplexService {
 
     const endpoint = '/wo/create-complex';
     const url = this.baseUrl + endpoint;
+    const headers = new HttpHeaders().set('x-api-key', environment.mApiKey);
 
     return this.http.get<Complex>(url, { 
       headers: this.headers,  withCredentials: true 

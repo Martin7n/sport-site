@@ -7,10 +7,8 @@ const router = Router();
 router.get("/", async(req, res) => {
     
      
-    res.send('home')
-  
-    // // res.render("home", {layout: false})
-});
+    res.send('BE WORKS')
+  });
 
 
 

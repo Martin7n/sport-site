@@ -69,10 +69,15 @@ export class UserDashboard implements OnInit {
         },
         error: () => {
           this.error = 'Failed to load liked complexes.';
+          alert(`Try loggin in: \n${this.error}`)
+
           this.loading = false;
+          window.location.href = '/';
         }
       });
     } else if (tab === 'generate') {
+
+      
       this.loading = true;
       this.error = '';
       this.generatedComplex = null;
@@ -86,8 +91,14 @@ export class UserDashboard implements OnInit {
           this.loading = false;
         },
         error: () => {
-          this.error = 'Failed to generate new complex.';
+           console.log(this.authService.isLoggedIn)
+
+           
+          this.error = 'Failed to load liked complexes.';
+          alert(`Try loggin in: \n${this.error}`)
+
           this.loading = false;
+          window.location.href = '/';
         }
       });
     }
