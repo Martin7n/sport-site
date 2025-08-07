@@ -10,12 +10,15 @@ const router = express.Router();
 router.post("/create", async (req, res) => {
   try {
     const { type, exercises, owner } = req.body;
+    console.log({ type, exercises, owner } )
 
     const newWorkout = new Workout({
       type,
       exercises,
       owner, // optional
     });
+
+    console.log(newWorkout)
 
     await newWorkout.save();
     res.status(201).json(newWorkout);

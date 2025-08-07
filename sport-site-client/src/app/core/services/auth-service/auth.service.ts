@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { environment } from '../../../../enviroments/enviroment';
 import {  Router } from '@angular/router';
+import { jwtDecode } from 'jwt-decode';
 
 // export interface AuthResponse {
 //   token: string;
@@ -56,6 +57,12 @@ import {  Router } from '@angular/router';
 //   }
 // }
 
+interface JwtPayload {
+  id: string;
+  username: string;
+  email?: string;
+  // add any fields your backend includes in the token
+}
 
 
 export interface AuthResponse {
@@ -129,6 +136,20 @@ export class AuthService {
     return localStorage.getItem('username') || sessionStorage.getItem('username');
   }
 
+  getUserId(): string | null {
+  const token = this.getToken();
+  console.log(token)
+  if (!token) return null;
+
+  try {
+    const decoded = jwtDecode<JwtPayload>(token);
+    return decoded.id;
+  } catch (error) {
+    console.error('[AuthService] Failed to decode token:', error);
+    return null;
+  }
+}
+
   logout(): void {
     // localStorage.removeItem('authToken');
     // localStorage.removeItem('username');
@@ -175,7 +196,6 @@ export class AuthService {
   }
 
   getToken(): string | null {
-    return localStorage.getItem('authToken') 
-    
-  }
+  return localStorage.getItem('authToken') || sessionStorage.getItem('authToken');
+}
 }

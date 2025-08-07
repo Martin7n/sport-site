@@ -30,7 +30,12 @@ export class WorkoutService {
   }
 
   createWorkout(payload: Workout): Observable<Workout> {
-    const url = `${this.baseUrl}/userworkout`;
+    const url = `${this.baseUrl}/userworkout/create`;
     return this.http.post<Workout>(url, payload, { headers: this.headers });
   }
+
+  getExercises(): Observable<{ _id: string; name: string }[]> {
+  return this.http.get<{ _id: string; name: string }[]>(`${this.baseUrl}/userworkout/exercise`, { headers: this.headers });
+}
+
 }

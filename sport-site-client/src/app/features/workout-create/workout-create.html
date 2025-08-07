@@ -1,1 +1,40 @@
 <p>workout-create works!</p>
+<form [formGroup]="workoutForm" (ngSubmit)="submit()">
+
+  <label>
+    Workout Type:
+    <input formControlName="type" placeholder="e.g., Upper Body" />
+  </label>
+
+  <label>
+    Add Exercise:
+    <select #exerciseSelect>
+      <option *ngFor="let ex of exercisesList" [value]="ex._id">{{ ex.name }}</option>
+    </select>
+    <button type="button" (click)="addExercise(exerciseSelect.value)">Add</button>
+  </label>
+
+  <div formArrayName="exercises" *ngIf="exercises.length > 0">
+    <div *ngFor="let exCtrl of exercises.controls; let i = index" [formGroupName]="i" class="exercise-block">
+      <h3>{{ exCtrl.get('name')?.value }}</h3>
+      <button type="button" (click)="removeExercise(i)">Remove Exercise</button>
+
+      <div formArrayName="sets">
+<div *ngFor="let setCtrl of getSetsControlArray(exCtrl).controls; let j = index" [formGroupName]="j" class="set-card">
+          <label>
+            Reps:
+            <input type="number" formControlName="reps" min="1" />
+          </label>
+          <label>
+            Weight:
+            <input type="number" formControlName="weight" min="0" />
+          </label>
+          <button type="button" (click)="removeSet(i, j)">Remove Set</button>
+        </div>
+        <button type="button" (click)="addSet(i)">Add Set</button>
+      </div>
+    </div>
+  </div>
+
+  <button type="submit" [disabled]="workoutForm.invalid">Create Workout</button>
+</form>

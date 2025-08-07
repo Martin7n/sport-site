@@ -34,9 +34,22 @@ export const routes: Routes = [
   },
     // { path: 'login', component: RegisterComponent},
 
-  {
+//   {
+//   path: 'user-workouts',
+//   loadComponent: () => import('./features/workout-list/workout-list').then(m => m.WorkoutListComponent)
+// },
+{
   path: 'user-workouts',
-  loadComponent: () => import('./features/workout-list/workout-list').then(m => m.WorkoutListComponent)
+  children: [
+    {
+      path: '',
+      loadComponent: () => import('./features/workout-list/workout-list').then(m => m.WorkoutListComponent)
+    },
+    {
+      path: 'create',
+      loadComponent: () => import('./features/workout-create/workout-create').then(m => m.WorkoutCreateComponent)
+    }
+  ]
 },
 
 
