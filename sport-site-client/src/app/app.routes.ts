@@ -34,6 +34,11 @@ export const routes: Routes = [
   },
     // { path: 'login', component: RegisterComponent},
 
-  
+  {
+  path: 'user-workouts',
+  loadComponent: () => import('./features/workout-list/workout-list').then(m => m.WorkoutListComponent)
+},
+
+
   { path: '**', redirectTo: '', pathMatch: 'full' }
 ];

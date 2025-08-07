@@ -1,0 +1,100 @@
+.workout-card {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.workout-card h4{ 
+    color: rgb(24, 23, 23);
+}
+
+.exercise-block {
+  background-color: #bbc2d6;
+  padding: 12px;
+  margin-top: 12px;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  
+}
+.exercise-block:first-of-type {
+  margin-top: 12px; /* Make sure it matches others */
+
+}
+
+.set-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+/* .set-card {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 8px 12px;
+  display: flex;
+  flex-direction: column;
+  min-width: 120px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+} */
+
+.button-group {
+  margin-top: 16px;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+/* Keep your existing .btn styles */
+.btn {
+  /* background-color: #007bff;
+  color: white;
+  padding: 8px 14px;
+  border: none; */
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.btn:hover {
+  /* background-color: #0056b3; */
+    background-color: #acccee;
+    color: #000;
+
+}
+
+@media (max-width: 600px) {
+  .set-list {
+    flex-direction: column;
+  }
+  
+  .set-card {
+    min-width: auto; /* let it fill parent width */
+    width: 100%;
+  }
+}
+
+
+.workout-card {
+  display: flex;
+  gap: 20px;
+  flex-wrap: nowrap; /* row on desktop */
+}
+
+/* Stack everything on narrow screens */
+@media (max-width: 800px) {
+  .workout-card {
+    flex-direction: column;
+  }
+}

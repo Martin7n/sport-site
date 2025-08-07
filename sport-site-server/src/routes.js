@@ -2,14 +2,18 @@ import { Router } from "express";
 import homeController from "../src/controllers/homeController.js"
 import authControler from "../src/controllers/authController.js"
 import complexController from "../src/controllers/complexControler.js"
+import workoutController from "../src/controllers/workoutController.js"
+
 import { apiKeyMware } from "./middlewares/api-auth.js";
 const routes = Router();
 
 routes.use(homeController);
-routes.use(apiKeyMware);
+// routes.use(apiKeyMware);
 routes.use("/", homeController);
 routes.use("/auth", authControler);
 routes.use("/wo", complexController); 
+routes.use("/userworkout", workoutController);
+
 
 
 // );
