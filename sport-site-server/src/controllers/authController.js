@@ -15,7 +15,15 @@ router.post("/register",  async (req, res) => {
     await authservice.register(userData);
     const { token, user } = await authservice.login(userData);
 
-    res.status(201).json({
+     res.cookie('authToken', token, {
+      httpOnly: true,
+      secure: false,         
+      sameSite: 'Lax',
+      maxAge: 1000 * 60 * 60 * 4, // 4 hours
+      path: '/',
+    });
+
+    res.status(200).json({
       token,
       username: user.username,
       email: user.email,
@@ -30,23 +38,6 @@ router.post("/register",  async (req, res) => {
 });
 
 
-// router.post("/login", async (req, res) => {
-//     try {
-//     const userData = req.body;
-
-//     const { token, user } = await authservice.login(userData);
-
-//     res.status(200).json({
-//       token,
-//       username: user.username,
-//       email: user.email,
-//       });
-//       } catch (err) {
-//       res.status(401).json({
-//         error: getErrorMessage(err),
-//       });
-//     }
-// });
 
 
 router.post("/login", async (req, res) => {
@@ -91,6 +82,19 @@ router.get("/logout",  (req, res) => {
     res.status(204).end();
   
 });
+
+
+router.get('/check',  (req, res) => {
+ 
+  console.log("CheckOut")
+  res.status(200).json({
+    valid: true,
+    // userId: req.user.id,
+    username: req.user.username,
+    email: req.user.email,
+  });
+});
+
 
 
 export default router;

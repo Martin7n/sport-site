@@ -70,7 +70,7 @@ export class Register {
     const formData = this.userForm.value;
 
     this.authService.register(formData).subscribe({
-      next: () => this.router.navigate(['/']),
+      next: () => this.router.navigate(['/profile']),
       error: (err: any) => console.error('Registration failed', err)
     });
   }

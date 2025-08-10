@@ -9,7 +9,7 @@ import { CommonModule, NgIf } from '@angular/common';
   standalone: true,
   imports: [RouterLink, CommonModule, NgIf],
   templateUrl: './navigation.component.html',
-  styleUrls: ['./navigation.component.css']  // ✅ FIXED
+  styleUrls: ['./navigation.component.css']   
 })
 
 
@@ -19,9 +19,19 @@ import { CommonModule, NgIf } from '@angular/common';
     showMenu = false;
     constructor(private router: Router, public auth: AuthService) {}
 
-    get isLoggedIn(): boolean {
-    return this.auth.isLoggedIn();
-  }
+    
+    
+  //   get isLoggedIn(): boolean | null {
+  //   const auth = this.auth;   
+  //   return auth.isLoggedInSignal();
+  // }
+
+  
+
+  get isLoggedIn(): boolean {
+  return !!this.auth.isLoggedInSignal();
+}
+  
 
   goToTestApi(): void {
     this.router.navigate(['/workouts']);

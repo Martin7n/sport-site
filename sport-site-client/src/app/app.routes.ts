@@ -40,8 +40,9 @@ export const routes: Routes = [
 // },
 {
   path: 'user-workouts',
+  // canActivate: [authGuard],
   children: [
-    {
+    { 
       path: '',
       loadComponent: () => import('./features/workout-list/workout-list').then(m => m.WorkoutListComponent)
     },

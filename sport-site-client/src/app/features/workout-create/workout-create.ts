@@ -145,7 +145,7 @@ export class WorkoutCreateComponent implements OnInit {
     this.workoutForm = this.fb.group({
       type: ['', Validators.required],
       exercises: this.fb.array([]),
-      owner: ['']  // will be patched during submit
+      owner: ['']   //!! TO DO
     });
 
     this.workoutService.getExercises().subscribe(data => {

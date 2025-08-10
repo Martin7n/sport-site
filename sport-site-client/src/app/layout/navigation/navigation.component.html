@@ -47,7 +47,7 @@
          
                 <!-- <h4>Users</h4> -->
                                  <a 
-  *ngIf="isLoggedIn" 
+*ngIf="auth.isLoggedInSignal()"
   routerLink="/profile" 
   class="ml-4 px-4 py-2 text-sm border border-gray-300 bg-white rounded-md shadow-sm hover:bg-gray-100 transition"
 >
@@ -66,7 +66,7 @@
                 <div
                     *ngIf="showMenu"
                     class="absolute right-0 mt-2 w-48 bg-white border rounded shadow-lg z-50">
-                <ng-container *ngIf="!auth.isLoggedIn(); else loggedIn">
+                <ng-container *ngIf="!isLoggedIn; else loggedIn">
                     <a routerLink="/login" class="block px-4 py-2 text-sm hover:bg-gray-100">Login</a>
                     <a routerLink="/register" class="block px-4 py-2 text-sm hover:bg-gray-100">Register</a>
                     </ng-container>
