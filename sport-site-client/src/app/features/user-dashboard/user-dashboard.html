@@ -91,9 +91,9 @@
 </div>
 
 <!-- Created tab placeholder -->
-<div *ngIf="selectedTab === 'created'">
-  <p>Created complexes feature coming soon...</p>
-</div>
+ <div *ngIf="selectedTab === 'created'">
+    <app-workout-list></app-workout-list>
+  </div>
 
 <button
   (click)="scrollToTop()"

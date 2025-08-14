@@ -69,8 +69,11 @@
     </div>
   </div>
 
+  <div *ngIf="successMessage" class="success">{{ successMessage }}</div>
+<div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+
   <div class="button-group">
-    <a [routerLink]="['/user-workouts', workout._id]" class="btn">Edit</a>
+      <a [routerLink]="['/user-workouts', workout._id, 'edit']" class="btn">Edit</a>
     <button class="btn" (click)="onDeleteWorkout(workout._id)">Delete</button>
     <button class="btn" (click)="onAddToRoutine(workout)">Add to Routine</button>
   </div>

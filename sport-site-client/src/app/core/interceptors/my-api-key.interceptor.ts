@@ -15,12 +15,11 @@ export class MyApiKeyInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     if (req.url.startsWith(environment.myApiUrl)) {
-      console.log("zzzzzzz")
       const clonedReq = req.clone({
         setHeaders: {
           'x-api-key': environment.mApiKey,
         },
-        withCredentials: true 
+        withCredentials: true,  // this sends cookies automatically
       });
 
       return next.handle(clonedReq);

@@ -4,6 +4,7 @@ import { ComplexWithImage } from '../../models/complexWithImg';
 import { ComplexService } from '../../core/services/complex-service/complex-service';
 import { COMPLEX_IMAGES } from '../../core/constants/images';
 import { AuthService } from '../../core/services/auth-service/auth.service';
+import { WorkoutListComponent } from '../workout-list/workout-list';
 
 
 
@@ -12,7 +13,7 @@ import { AuthService } from '../../core/services/auth-service/auth.service';
 @Component({
   selector: 'user-dashboard',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, WorkoutListComponent],
   templateUrl: './user-dashboard.html',
   styleUrls: ['./user-dashboard.css'],
 })

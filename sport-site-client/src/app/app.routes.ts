@@ -49,6 +49,10 @@ export const routes: Routes = [
     {
       path: 'create',
       loadComponent: () => import('./features/workout-create/workout-create').then(m => m.WorkoutCreateComponent)
+    },
+    {
+      path: ':id/edit',
+      loadComponent: () => import('./features/workout-edit/workout-edit').then(m => m.WorkoutEditComponent)
     }
   ]
 },

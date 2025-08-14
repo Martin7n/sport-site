@@ -15,8 +15,9 @@ export class WorkoutService {
 
   getWorkout(id: string): Observable<Workout> {
     const url = `${this.baseUrl}/userworkout/${id}`;
-    return this.http.get<Workout>(url, { headers: this.headers });
+    return this.http.get<Workout>(url, { headers: this.headers, withCredentials: true });
   }
+
 
   updateWorkout(id: string, payload: Partial<Workout>): Observable<Workout> {
     const url = `${this.baseUrl}/userworkout/${id}`;
@@ -36,6 +37,11 @@ export class WorkoutService {
 
   getExercises(): Observable<{ _id: string; name: string }[]> {
   return this.http.get<{ _id: string; name: string }[]>(`${this.baseUrl}/userworkout/exercise`, { headers: this.headers });
+}
+
+  deleteWorkout(id: string): Observable<any> {
+  const url = `${this.baseUrl}/userworkout/del/${id}`;
+  return this.http.get(url, { headers: this.headers });
 }
 
 }

@@ -1,1 +1,85 @@
-<p>workout-edit works!</p>
+<div class="workout-edit-container" *ngIf="workoutForm">
+  <h2>Edit Workout</h2>
+
+  <form [formGroup]="workoutForm" (ngSubmit)="submit()" class="form-card">
+
+    <!-- Workout Type -->
+    <div class="form-group">
+      <label for="type">Workout Type</label>
+      <input
+        id="type"
+        formControlName="type"
+        type="text"
+        placeholder="Workout Type (e.g., Upper Body)"
+        class="input"
+      />
+      <div class="error" *ngIf="workoutForm.get('type')?.invalid && workoutForm.get('type')?.touched">
+        Workout type is required.
+      </div>
+    </div>
+
+    <!-- Exercises -->
+    <div formArrayName="exercises" class="exercises-section">
+      <div *ngFor="let exCtrl of exercises.controls; let i = index" [formGroupName]="i" class="exercise-card">
+
+        <h3>Exercise {{ i + 1 }}: {{ exCtrl.get('name')?.value }}</h3>
+
+        <!-- Sets -->
+        <div formArrayName="sets" class="sets-section">
+          <div
+            *ngFor="let setCtrl of getSets(i).controls; let j = index"
+            [formGroupName]="j"
+            class="set-card"
+          >
+            <div class="set-header">Set {{ j + 1 }}</div>
+
+            <div class="set-fields">
+              <input
+                type="number"
+                formControlName="reps"
+                min="1"
+                max="20"
+                placeholder="Reps (1–20)"
+                class="input"
+              />
+              <div class="error" *ngIf="setCtrl.get('reps')?.invalid && setCtrl.get('reps')?.touched">
+                Enter reps between 1–20.
+              </div>
+
+              <input
+                type="number"
+                formControlName="weight"
+                step="0.5"
+                min="1"
+                placeholder="Weight (≥ 1, step 0.5)"
+                class="input"
+              />
+              <div class="error" *ngIf="setCtrl.get('weight')?.invalid && setCtrl.get('weight')?.touched">
+                <ng-container *ngIf="setCtrl.get('weight')?.errors?.['required']">
+                  Weight is required.
+                </ng-container>
+                <ng-container *ngIf="setCtrl.get('weight')?.errors?.['min']">
+                  Weight must be at least 1.
+                </ng-container>
+                <ng-container *ngIf="setCtrl.get('weight')?.errors?.['invalidWeight']">
+                  Must be a multiple of 0.5.
+                </ng-container>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Submit -->
+    <div class="form-actions">
+      <button type="submit" [disabled]="loading || workoutForm.invalid" class="btn-primary">
+        {{ loading ? 'Updating...' : 'Update Workout' }}
+      </button>
+    </div>
+
+    <!-- Success/Error Messages -->
+    <div class="success" *ngIf="successMessage">{{ successMessage }}</div>
+    <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
+  </form>
+</div>

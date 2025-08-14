@@ -32,94 +32,9 @@ router.post("/create", async (req, res) => {
 
 router.get("/", async (req, res) => {
   try {
-    // const workouts = await Workout.find()
-    //   .populate("exercises.exercise") // populate exercise details
-    //   .populate("owner"); // optional
-
-    const workouts = [
-        {
-  "type": "Upper Body",
-  "owner": "64b7f24c8e...",
-  "exercises": [
-    {
-      "exercise": "64b7f1e23f...",
-      "name":"press",
-      "sets": [
-        { "reps": 10, "weight": 50 },
-        { "reps": 8, "weight": 55 },
-        { "reps": 6, "weight": 60 }
-      ]
-    },
-    {
-      "exercise": "64b7f1f44c...",
-      "name":"deadlift",
-      "sets": [
-        { "reps": 12 },
-        { "reps": 12 },
-        { "reps": 12 }
-      ]
-    },
-    {
-      "exercise": "64b7f1f44c...",
-      "name":"deadlift",
-      "sets": [
-        { "reps": 12 },
-        { "reps": 12 },
-        { "reps": 12 }
-      ]
-    },
-    {
-      "exercise": "64b7f1f44c...",
-      "name":"deadlift",
-      "sets": [
-        { "reps": 12 },
-        { "reps": 12 },
-        { "reps": 12 }
-      ]
-    }
-  ]
-},{
-  "type": "Upper Body",
-  "owner": "64b7f24c8e...",
-  "exercises": [
-    {
-      "exercise": "64b7f1e23f...",
-      "name":"press",
-      "sets": [
-        { "reps": 10, "weight": 50 },
-        { "reps": 8, "weight": 55 },
-        { "reps": 6, "weight": 60 }
-      ]
-    },
-    {
-      "exercise": "64b7f1f44c...",
-      "name":"deadlift",
-      "sets": [
-        { "reps": 12 },
-        { "reps": 12 },
-        { "reps": 12 }
-      ]
-    },
-    {
-      "exercise": "64b7f1f44c...",
-      "name":"deadlift",
-      "sets": [
-        { "reps": 12 },
-        { "reps": 12 },
-        { "reps": 12 }
-      ]
-    },
-    {
-      "exercise": "64b7f1f44c...",
-      "name":"deadlift",
-      "sets": [
-        { "reps": 12 },
-        { "reps": 12 },
-        { "reps": 12 }
-      ]
-    }
-  ]
-}]
+    const workouts = await Workout.find()
+      .populate("exercises.exercise") // populate exercise details
+      .populate("owner"); // optional
     console.log(workouts)
     res.json(workouts);
   } catch (error) {
@@ -149,6 +64,44 @@ router.put("/:id", async (req, res) => {
     console.error("Update workout error:", error);
     res.status(500).json({ message: "Failed to update workout." });
   }
+});
+
+router.get("/:id", async (req, res) => {
+ 
+  try {
+    const workout = await Workout.findById(req.params.id);
+
+    if (!workout) {
+      return res.status(404).json({ message: "Workout not found." });
+    }
+
+    res.json(workout);
+  } catch (error) {
+    console.error("Get workout by ID error:", error);
+    res.status(500).json({ message: "Failed to get workout." });
+  }
+});
+
+
+router.get('/del/:id', async (req, res) => {
+  console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+    console.log(req.cookies)
+      console.log("BBBBBBBBBBBBBBBB")
+
+  // try {
+  //   const workoutId = req.params.id;
+
+  //   const deletedWorkout = await Workout.findByIdAndDelete(workoutId);
+
+  //   if (!deletedWorkout) {
+  //     return res.status(404).json({ message: 'Workout not found.' });
+  //   }
+
+  //   res.json({ message: 'Workout deleted successfully.' });
+  // } catch (error) {
+  //   console.error('Delete workout error:', error);
+  //   res.status(500).json({ message: 'Failed to delete workout.' });
+  // }
 });
 
 

@@ -5,8 +5,10 @@ import complexController from "../src/controllers/complexControler.js"
 import workoutController from "../src/controllers/workoutController.js"
 
 import { apiKeyMware } from "./middlewares/api-auth.js";
+import { authMiddleware } from "./middlewares/auth-middleware.js";
 const routes = Router();
 
+routes.use(authMiddleware);
 routes.use(homeController);
 // routes.use(apiKeyMware);
 routes.use("/", homeController);

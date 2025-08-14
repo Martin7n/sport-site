@@ -54,6 +54,7 @@ export const isAuth = (req, res, next) => {
     const decoded = jwt.verify(token, process.env.JSON_WEBTOKEN_SECRET);
     console.log(decoded)
 
+
     req.user = {
       id: decoded.id,
       email: decoded.email,
