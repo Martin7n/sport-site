@@ -1,4 +1,4 @@
-form {
+/* form {
   max-width: 800px;
   margin: 2rem auto;
   padding: 2rem;
@@ -94,4 +94,162 @@ h3 {
   input {
     width: 100%;
   }
+} */
+
+
+/* .error {
+  color: red;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+} */
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Exercise block wrapper */
+.exercise-block {
+  max-width: 600px;
+  width: 90%;
+  margin: 1rem auto;
+  padding: 1rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  box-sizing: border-box;
+}
+
+
+/* Card style for each set */
+.set-card {
+  background: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Set card header */
+.set-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+/* Set field input area */
+.set-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.set-fields input {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: white;
+}
+
+.set-fields input.ng-invalid.ng-touched {
+  border-color: red;
+}
+
+/* Error message */
+.error {
+  color: red;
+  font-size: 0.85rem;
+}
+
+/* Responsive behavior */
+@media (max-width: 400px) {
+  .exercise-block {
+    max-width: 100%;
+    padding: 0.5rem;
+  }
+}
+
+.exercise-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+  
+}
+
+.exercise-label {
+  font-weight: 600;
+  min-width: 100px;
+}
+
+input,
+select {
+  background-color: white;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 0.5rem;
+  font-size: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Focus style */
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+/* Placeholder style for selects (not officially supported, but we can style the disabled option) */
+select option[disabled] {
+  color: #999;
+}
+
+/* Optional: consistent spacing for select and label area */
+.exercise-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.exercise-label {
+  font-weight: 600;
+  min-width: 100px;
+}
+
+
+.workout-type-label {
+  display: block;
+  max-width: 600px;
+  width: 90%;
+  margin: 1rem auto;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #333;
+}
+
+.workout-type-label input {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  margin-top: 0.25rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  box-sizing: border-box;
+  background: white;
+  transition: border-color 0.2s;
+}
+
+.workout-type-label input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 3px rgba(0,123,255,0.5);
 }

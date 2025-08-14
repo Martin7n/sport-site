@@ -1,40 +1,176 @@
-<p>workout-create works!</p>
+<!-- 
+
+
 <form [formGroup]="workoutForm" (ngSubmit)="submit()">
+  
 
   <label>
     Workout Type:
-    <input formControlName="type" placeholder="e.g., Upper Body" />
+    <input formControlName="type" placeholder="e.g., Full Body" />
   </label>
 
-  <label>
-    Add Exercise:
-    <select #exerciseSelect>
-      <option *ngFor="let ex of exercisesList" [value]="ex._id">{{ ex.name }}</option>
-    </select>
-    <button type="button" (click)="addExercise(exerciseSelect.value)">Add</button>
-  </label>
-
-  <div formArrayName="exercises" *ngIf="exercises.length > 0">
+  <div formArrayName="exercises">
     <div *ngFor="let exCtrl of exercises.controls; let i = index" [formGroupName]="i" class="exercise-block">
-      <h3>{{ exCtrl.get('name')?.value }}</h3>
-      <button type="button" (click)="removeExercise(i)">Remove Exercise</button>
+
+      <h3>Exercise {{ i + 1 }}</h3>
+
+      <label>
+        Select Exercise:
+        <select formControlName="exercise" (change)="onExerciseSelect(i, exCtrl.get('exercise')?.value)">
+  <option [ngValue]="null" disabled>Select...</option>
+  <option *ngFor="let ex of exercisesList" [value]="ex._id">{{ ex.name }}</option>
+</select>
+      </label>
+
+      <div *ngIf="exCtrl.get('name')?.value">
+        <strong>Selected:</strong> {{ exCtrl.get('name')?.value }}
+      </div>
 
       <div formArrayName="sets">
-<div *ngFor="let setCtrl of getSetsControlArray(exCtrl).controls; let j = index" [formGroupName]="j" class="set-card">
-          <label>
-            Reps:
-            <input type="number" formControlName="reps" min="1" />
-          </label>
-          <label>
-            Weight:
-            <input type="number" formControlName="weight" min="0" />
-          </label>
+        <div *ngFor="let setCtrl of getSetsControlArray(exCtrl).controls; let j = index" [formGroupName]="j" class="set-card">
+
+                  <input
+            type="number"
+            formControlName="reps"
+            min="1"
+            max="20"
+            placeholder="Reps (1–20)"
+          />
+          <div class="error" *ngIf="setCtrl.get('reps')?.invalid && setCtrl.get('reps')?.touched">
+            Reps required (1–20)
+          </div>
+
+                    <input
+  type="number"
+  formControlName="weight"
+  step="0.5"
+  placeholder="Weight (e.g. 12.5)"
+/>
+<div class="error" *ngIf="setCtrl.get('weight')?.invalid && setCtrl.get('weight')?.touched">
+  <ng-container *ngIf="setCtrl.get('weight')?.errors?.['invalidWeight']">
+    Weight must be a multiple of 0.5
+  </ng-container>
+  <ng-container *ngIf="setCtrl.get('weight')?.errors?.['required']">
+    Weight is required
+  </ng-container>
+</div>
           <button type="button" (click)="removeSet(i, j)">Remove Set</button>
         </div>
+
         <button type="button" (click)="addSet(i)">Add Set</button>
       </div>
+
+      <button *ngIf="i > 0" type="button" (click)="removeExercise(i)">Remove Exercise</button>
     </div>
   </div>
 
+   <button type="button" (click)="addExerciseForm()">Add Another Exercise</button>
+
+  <br /><br />
   <button type="submit" [disabled]="workoutForm.invalid">Create Workout</button>
+
+</form> -->
+
+<form [formGroup]="workoutForm" (ngSubmit)="submit()">
+
+  <!-- Workout Type -->
+<label class="workout-type-label">
+  Workout Type:
+  <input formControlName="type" placeholder="e.g., Full Body" />
+</label>
+
+  <!-- Exercises Form Array -->
+  <div formArrayName="exercises">
+
+    <div
+      *ngFor="let exCtrl of exercises.controls; let i = index"
+      [formGroupName]="i"
+      class="exercise-block"
+    >
+
+ 
+      <!-- Select Exercise -->
+        <div class="exercise-header">
+          <span class="exercise-label">Exercise {{ i + 1 }}</span>
+          <select
+            formControlName="exercise"
+            (change)="onExerciseSelect(i, exCtrl.get('exercise')?.value)"
+          >
+         
+      <option value="" disabled>Pick your exercise...</option>
+            <option *ngFor="let ex of exercisesList" [value]="ex._id">{{ ex.name }}</option>
+          </select>
+          </div>
+
+      <!-- Selected Exercise Name -->
+      <div *ngIf="exCtrl.get('name')?.value">
+        <strong>Selected:</strong> {{ exCtrl.get('name')?.value }}
+      </div>
+
+      <!-- Sets -->
+      <div formArrayName="sets">
+        <div
+          *ngFor="let setCtrl of getSetsControlArray(exCtrl).controls; let j = index"
+          [formGroupName]="j"
+          class="set-card"
+        >
+          <div class="set-header">
+            <span>Set {{ j + 1 }}</span>
+            <button type="button" (click)="removeSet(i, j)">✕</button>
+          </div>
+
+          <div class="set-fields">
+            <!-- Reps Input -->
+            <input
+              type="number"
+              formControlName="reps"
+              min="1"
+              max="20"
+              placeholder="Reps (1–20)"
+            />
+            <div class="error" *ngIf="setCtrl.get('reps')?.invalid && setCtrl.get('reps')?.touched">
+              Enter reps between 1–20
+            </div>
+
+            <!-- Weight Input -->
+            <input
+              type="number"
+              formControlName="weight"
+              step="0.5"
+              min="1"
+              placeholder="Weight (min 1, step 0.5)"
+            />
+            <div class="error" *ngIf="setCtrl.get('weight')?.invalid && setCtrl.get('weight')?.touched">
+              <ng-container *ngIf="setCtrl.get('weight')?.errors?.['required']">
+                Weight is required
+              </ng-container>
+              <ng-container *ngIf="setCtrl.get('weight')?.errors?.['min']">
+                Must be at least 1
+              </ng-container>
+              <ng-container *ngIf="setCtrl.get('weight')?.errors?.['invalidWeight']">
+                Must be a multiple of 0.5
+              </ng-container>
+            </div>
+          </div>
+        </div>
+
+        <button type="button" (click)="addSet(i)">Add Set</button>
+      </div>
+
+      <button type="button" (click)="removeExercise(i)" *ngIf="i > 0">Remove Exercise</button>
+
+    </div>
+
+  </div>
+
+  <br />
+
+  <!-- Add Optional Exercise -->
+  <button type="button" (click)="addExerciseForm()">Add Another Exercise</button>
+
+  <br /><br />
+
+  <!-- Submit -->
+  <button type="submit" [disabled]="workoutForm.invalid">Create Workout</button>
+
 </form>

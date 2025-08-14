@@ -8,6 +8,7 @@ const router = express.Router();
 
 // POST /api/workouts
 router.post("/create", async (req, res) => {
+  console.log(req.body)
   try {
     const { type, exercises, owner } = req.body;
     console.log({ type, exercises, owner } )
