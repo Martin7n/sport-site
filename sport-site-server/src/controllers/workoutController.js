@@ -32,10 +32,17 @@ router.post("/create", async (req, res) => {
 
 
 router.get("/", async (req, res) => {
+  const userId = req.user?.id
+
+  if (!userId) {
+  return res.status(401).json({ message: 'Unauthorized: User not authenticated' });
+}
+  
   try {
-    const workouts = await Workout.find()
-      .populate("exercises.exercise") // populate exercise details
-      .populate("owner"); // optional
+    const workouts = await Workout.find({ owner: userId })
+    .populate("exercises.exercise")  
+    .populate("owner");  
+  res.json(workouts);
     console.log(workouts)
     res.json(workouts);
   } catch (error) {

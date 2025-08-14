@@ -30,6 +30,12 @@
   <button (click)="selectTab('liked')" [class.active]="selectedTab === 'liked'">Liked</button>
   <button (click)="selectTab('created')" [class.active]="selectedTab === 'created'">Created</button>
   <button (click)="selectTab('generate')" [class.active]="selectedTab === 'generate'">Generate New</button>
+  <button
+    (click)="goToCreatedWorkouts()"
+    class="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700 transition duration-200 shadow-md"
+  >
+    View Created Workouts
+  </button>
 </div>
 
 
@@ -67,10 +73,6 @@
   </div>
 </div>
 
-<!-- Created Tab Placeholder -->
-<div *ngIf="selectedTab === 'created'">
-  <p class="text-gray-700">Created complexes will be shown here soon.</p>
-</div>
 
 <!-- Generate Tab -->
 <div *ngIf="selectedTab === 'generate'">

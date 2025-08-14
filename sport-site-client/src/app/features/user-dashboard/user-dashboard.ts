@@ -5,6 +5,7 @@ import { ComplexService } from '../../core/services/complex-service/complex-serv
 import { COMPLEX_IMAGES } from '../../core/constants/images';
 import { AuthService } from '../../core/services/auth-service/auth.service';
 import { WorkoutListComponent } from '../workout-list/workout-list';
+import { Router } from '@angular/router';
 
 
 
@@ -23,13 +24,15 @@ export class UserDashboard implements OnInit {
   likedData: ComplexWithImage[] = [];
   generatedComplex: ComplexWithImage | null = null;
 
+
   loading = false;
   error = '';
   images = COMPLEX_IMAGES;
 
   constructor(
     private complexService: ComplexService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   get isLoggedIn(): boolean {
@@ -134,6 +137,10 @@ export class UserDashboard implements OnInit {
       }
     });
   }
+
+  goToCreatedWorkouts() {
+  this.router.navigate(['/user-workouts']);
+}
 
   scrollToTop(): void {
     window.scrollTo({ top: 0, behavior: 'smooth' });

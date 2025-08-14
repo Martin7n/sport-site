@@ -40,7 +40,7 @@ export const routes: Routes = [
 // },
 {
   path: 'user-workouts',
-  // canActivate: [authGuard],
+  canActivate: [authGuard],
   children: [
     { 
       path: '',

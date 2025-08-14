@@ -1,79 +1,33 @@
-<!-- <div *ngIf="loading" class="loading">Loading...</div>
-<div *ngIf="error" class="error">{{ error }}</div>
-
-<h2 *ngIf="!loading">Your Workouts</h2>
-
-<div *ngIf="!loading && workouts.length === 0" class="empty-state">
-  No workouts found.
-</div>
-
-<div *ngFor="let workout of workouts" class="workout-card">
-  <h3>{{ workout.type }}</h3>
-  <p><strong>Owner:</strong> {{ workout.owner }}</p>
-  <p><strong>Total Exercises:</strong> {{ workout.exercises.length }}</p>
-
-  <div *ngFor="let ex of workout.exercises; let i = index" class="exercise-block">
-    <h4>Exercise {{ i + 1 }}: {{ ex.name | capitalize }}</h4>
-
-    <table class="sets-table">
-      <thead>
-        <tr>
-          <th>Set #</th>
-          <th>Reps</th>
-          <th>Weight</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let set of ex.sets; let j = index">
-          <td>{{ j + 1 }}</td>
-          <td>{{ set.reps }}</td>
-          <td>{{ set.weight || '-' }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="button-group">
-    <a [routerLink]="['/user-workouts', workout._id]" class="btn edit">Edit</a>
-    <button class="btn delete" (click)="onDeleteWorkout(workout._id)">Delete</button>
-    <button class="btn routine" (click)="onAddToRoutine(workout)">Add to Routine</button>
-  </div>
-</div>
- -->
-
 
 
 
 <div *ngIf="loading" class="loading">Loading...</div>
 <div *ngIf="error" class="error">{{ error }}</div>
 
-<h2 *ngIf="!loading">Your Workouts</h2>
+<h2 *ngIf="!loading && !error">Your Workouts</h2>
 
-<div *ngIf="!loading && workouts.length === 0" class="empty-state">
+<div *ngIf="!loading && !error && workouts.length === 0" class="empty-state">
   No workouts found.
 </div>
 
 <div *ngFor="let workout of workouts" class="workout-card">
   <h3>{{ workout.type }}</h3>
-  <!-- <p><strong>Owner:</strong> {{ workout.owner }}</p> -->
   <p><strong>Total Exercises:</strong> {{ workout.exercises.length }}</p>
 
   <div *ngFor="let ex of workout.exercises; let i = index" class="exercise-block">
     <h4>Exercise {{ i + 1 }}: {{ ex.name | capitalize }}</h4>
-
     <div class="set-list">
       <div *ngFor="let set of ex.sets; let j = index" class="set-card">
-       <p>Set {{ j + 1 }} Reps: {{ set.reps }} Weight: {{ set.weight || '-' }}</p>
-       
+        <p>Set {{ j + 1 }} Reps: {{ set.reps }} Weight: {{ set.weight || '-' }}</p>
       </div>
     </div>
   </div>
 
   <div *ngIf="successMessage" class="success">{{ successMessage }}</div>
-<div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+  <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
 
   <div class="button-group">
-      <a [routerLink]="['/user-workouts', workout._id, 'edit']" class="btn">Edit</a>
+    <a [routerLink]="['/user-workouts', workout._id, 'edit']" class="btn">Edit</a>
     <button class="btn" (click)="onDeleteWorkout(workout._id)">Delete</button>
     <button class="btn" (click)="onAddToRoutine(workout)">Add to Routine</button>
   </div>
