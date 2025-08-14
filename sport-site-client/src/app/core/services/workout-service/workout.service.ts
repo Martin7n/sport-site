@@ -36,7 +36,8 @@ export class WorkoutService {
   }
 
   getExercises(): Observable<{ _id: string; name: string }[]> {
-  return this.http.get<{ _id: string; name: string }[]>(`${this.baseUrl}/userworkout/exercise`, { headers: this.headers, withCredentials: true });
+    const headers = new HttpHeaders().set('x-api-key', environment.mApiKey);
+  return this.http.get<{ _id: string; name: string }[]>(`${this.baseUrl}/userworkout/exercise`, { headers: headers, withCredentials: true });
 }
 
   deleteWorkout(id: string): Observable<any> {

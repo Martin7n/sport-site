@@ -38,6 +38,7 @@ export class WorkoutListComponent implements OnInit {
   }
 
 
+  
  onEditWorkout(workout: Workout) {
      if (!workout._id) return;
     this.router.navigate(['/user-workouts', workout._id, 'edit']);

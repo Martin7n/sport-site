@@ -74,15 +74,15 @@
 <form [formGroup]="workoutForm" (ngSubmit)="submit()">
 
   <!-- Workout Type -->
-<label class="workout-type-label">
-  Workout Type:
-  <input formControlName="type" placeholder="e.g., Full Body" />
-</label>
+<div class="workout-type-container">
+  <label for="type" class="workout-type-label">Workout Type:</label>
+  <input id="type" formControlName="type" placeholder="e.g., Full Body" />
+</div>
 
   <!-- Exercises Form Array -->
   <div formArrayName="exercises">
 
-    <div
+    <diva
       *ngFor="let exCtrl of exercises.controls; let i = index"
       [formGroupName]="i"
       class="exercise-block"
@@ -96,7 +96,7 @@
             formControlName="exercise"
             (change)="onExerciseSelect(i, exCtrl.get('exercise')?.value)"
           >
-         
+          placeholder="Pick your exercise..."
       <option value="" disabled>Pick your exercise...</option>
             <option *ngFor="let ex of exercisesList" [value]="ex._id">{{ ex.name }}</option>
           </select>

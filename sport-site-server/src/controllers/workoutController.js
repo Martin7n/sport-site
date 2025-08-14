@@ -36,14 +36,13 @@ router.get("/", async (req, res) => {
 
   if (!userId) {
   return res.status(401).json({ message: 'Unauthorized: User not authenticated' });
-}
+  }
   
   try {
     const workouts = await Workout.find({ owner: userId })
     .populate("exercises.exercise")  
     .populate("owner");  
-  res.json(workouts);
-    console.log(workouts)
+     console.log(workouts)
     res.json(workouts);
   } catch (error) {
     console.error("Get workouts error:", error);
@@ -73,6 +72,22 @@ router.put("/:id", async (req, res) => {
     res.status(500).json({ message: "Failed to update workout." });
   }
 });
+
+
+router.get("/exercise", async(req, res) => {
+    try {
+
+        const exercises = await Exercise.find()
+        res.json(exercises);
+
+
+    } catch (error){
+    
+        console.error("exercise error:", error);
+    res.status(500).json({ message: "Failed to fetch exercise." });
+    }
+     
+  });
 
 router.get("/:id", async (req, res) => {
  
@@ -118,19 +133,6 @@ router.get('/del/:id', async (req, res) => {
 });
 
 
-router.get("/exercise", async(req, res) => {
-    try {
 
-        const exercises = await Exercise.find()
-        res.json(exercises);
-
-
-    } catch (error){
-    
-        console.error("exercise error:", error);
-    res.status(500).json({ message: "Failed to fetch exercise." });
-    }
-     
-  });
 
 export default router;
