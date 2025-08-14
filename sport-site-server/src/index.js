@@ -24,7 +24,7 @@ app.use(expressSession({
     saveUninitialized: false,
     cookie: {
         secure: false,
-        httpOnly: true
+        httpOnly: true,
     }
 }));
 

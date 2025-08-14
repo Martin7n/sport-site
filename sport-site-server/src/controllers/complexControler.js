@@ -34,7 +34,13 @@ router.get("/read-complexes", async (req, res) => {
     try {
         const userId = req.user?.id;
 
-        const all = await complexService.readComplex()
+        //  const userId = req.user?.id;
+        // if (!userId) {
+        //   return res.status(401).json({ message: 'Unauthorized' });
+        // }
+
+
+        // const all = await complexService.readComplex()
         // const allt = await complexService.readComplexes({type:"second"})
         // const allt = await complexService.readFourRandom()
         const complexes = await complexService.readFourRandom({}, userId);

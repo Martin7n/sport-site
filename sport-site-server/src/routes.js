@@ -10,7 +10,7 @@ const routes = Router();
 
 routes.use(authMiddleware);
 routes.use(homeController);
-// routes.use(apiKeyMware);
+routes.use(apiKeyMware);
 routes.use("/", homeController);
 routes.use("/auth", authControler);
 routes.use("/wo", complexController); 

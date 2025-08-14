@@ -71,7 +71,7 @@ router.get("/logout",  (req, res) => {
 
     res.clearCookie(process.env.AUTH_COOKIE_NAME, {
         httpOnly: false,
-        sameSite: 'None',
+        // sameSite: 'Lax',
         // sameSite: 'Lax',
         path: '/',
         secure: true,  

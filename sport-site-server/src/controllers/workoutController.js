@@ -3,6 +3,7 @@
 import express from "express";
 import Workout from "../models/Workout.js";
 import Exercise from "../models/Exercise.js";
+import { isAuth } from "../middlewares/auth-middleware.js";
 
 const router = express.Router();
 
@@ -84,24 +85,29 @@ router.get("/:id", async (req, res) => {
 
 
 router.get('/del/:id', async (req, res) => {
-  console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
-    console.log(req.cookies)
-      console.log("BBBBBBBBBBBBBBBB")
+  try {
+    const rquser = req.user?.id;
+    if (!rquser) {
+      return res.status(401).json({ message: 'Unauthorized' });
+    }
 
-  // try {
-  //   const workoutId = req.params.id;
+    const workoutId = req.params.id;
+    const workout = await Workout.findById(workoutId);
 
-  //   const deletedWorkout = await Workout.findByIdAndDelete(workoutId);
+    if (!workout) {
+      return res.status(404).json({ message: 'Workout not found.' });
+    }
 
-  //   if (!deletedWorkout) {
-  //     return res.status(404).json({ message: 'Workout not found.' });
-  //   }
+    if (workout.owner.toString() !== rquser) {
+      return res.status(403).json({ message: 'Forbidden: You do not own this workout.' });
+    }
 
-  //   res.json({ message: 'Workout deleted successfully.' });
-  // } catch (error) {
-  //   console.error('Delete workout error:', error);
-  //   res.status(500).json({ message: 'Failed to delete workout.' });
-  // }
+    await Workout.findByIdAndDelete(workoutId);
+    res.json({ message: 'Workout deleted successfully.' });
+  } catch (error) {
+    console.error('Delete workout error:', error);
+    res.status(500).json({ message: 'Failed to delete workout.' });
+  }
 });
 
 
