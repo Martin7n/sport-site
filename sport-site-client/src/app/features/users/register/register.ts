@@ -23,6 +23,10 @@ export class Register {
   userForm: FormGroup;
   submitted = false;
 
+  serverError: string | null = null;
+  serverFieldErrors: { [key: string]: string } = {};
+
+
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
@@ -69,9 +73,18 @@ export class Register {
 
     const formData = this.userForm.value;
 
-    this.authService.register(formData).subscribe({
+     this.authService.register(formData).subscribe({
       next: () => this.router.navigate(['/profile']),
-      error: (err: any) => console.error('Registration failed', err)
+      error: (err: any) => {
+        console.error('Registration failed', err);
+      
+    if (err?.error?.field && err?.error?.message) {
+          this.serverFieldErrors[err.error.field] = err.error.message;
+        } else if (err?.error?.message) {
+          this.serverError = err.error.message;
+        } else {
+          this.serverError = 'An unexpected error occurred.';
+        }
+      }
     });
-  }
-}
+  }}

@@ -15,24 +15,22 @@ router.post("/register",  async (req, res) => {
     await authservice.register(userData);
     const { token, user } = await authservice.login(userData);
 
-     res.cookie('authToken', token, {
-      httpOnly: true,
-      secure: false,         
-      sameSite: 'Lax',
-      maxAge: 1000 * 60 * 60 * 4, // 4 hours
-      path: '/',
-    });
+          res.cookie('authToken', token, {
+            httpOnly: true,
+            secure: false,         
+            sameSite: 'Lax',
+            maxAge: 1000 * 60 * 60 * 4, // 4 hours
+            path: '/',
+          });
 
-    res.status(200).json({
-      token,
-      username: user.username,
-      email: user.email,
-    });
+          res.status(200).json({
+            token,
+            username: user.username,
+            email: user.email,
+          });
     } catch (err) {
-      console.log(err)
-      res.status(400).json({
-      error: getErrorMessage(err),
-    });
+      console.log(err.message)
+      res.status(400).json({ message: err.message });
   }
 
 });

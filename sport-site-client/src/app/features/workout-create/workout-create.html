@@ -82,7 +82,7 @@
   <!-- Exercises Form Array -->
   <div formArrayName="exercises">
 
-    <diva
+    <div
       *ngFor="let exCtrl of exercises.controls; let i = index"
       [formGroupName]="i"
       class="exercise-block"

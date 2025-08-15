@@ -43,5 +43,14 @@
   <small>Passwords do not match.</small>
 </div>
 
+<div *ngIf="serverError" class="error-message">
+  <small>{{ serverError }}</small>
+</div>
+
+<!-- Email-specific server error -->
+<div *ngIf="serverFieldErrors['email']" class="error-message">
+  <small>{{ serverFieldErrors['email'] }}</small>
+</div>
+
   <button type="submit">Register</button>
 </form>
