@@ -5,6 +5,7 @@ import Exercise from "../models/Exercise.js"
 export default {
 
     createExercise(){
+        //test
         const newEx = new Exercise(
             {
                 type:"basic",
@@ -37,8 +38,9 @@ export default {
                        {$match: {subcategory: "condition"}}, 
                     { $sample: { size: 1 } }])
 
-        console.log([fst[0]._id, snd[0]._id, trd[0]._id])
+        // console.log([fst[0]._id, snd[0]._id, trd[0]._id])
 
+ 
         
         const createdComplex = new Complex(
             {

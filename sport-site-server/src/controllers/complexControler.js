@@ -13,7 +13,7 @@ router.get("/add-exercise", async (req, res) => {
     res.json(newEx)
 })
 
-router.get("/create-complex",  isAuth, async (req, res) => {
+router.get("/create-complex",  async (req, res) => {
           console.log(req.user?.id)
 
     try {
@@ -24,7 +24,9 @@ router.get("/create-complex",  isAuth, async (req, res) => {
       res.json(createdComplex);
       } catch (err) {
         console.error(err);
-        res.status(500).json({ message: 'Server error creating complex' });
+                res.status(500).json({ message: err });
+
+        // res.status(500).json({ message: 'Server error creating complex' });
     }
 
 
