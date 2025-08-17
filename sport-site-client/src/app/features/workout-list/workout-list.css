@@ -7,9 +7,12 @@
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
   display: flex;
   flex-direction: column;
-  align-items: center;
+  gap: 20px;
+  /* REMOVE or override align-items */
+  align-items: stretch;
+  width: 100%;
+  box-sizing: border-box;
 }
-
 .workout-card h4{ 
     color: rgb(24, 23, 23);
 }
@@ -22,21 +25,22 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  
+   
 }
 .exercise-block:first-of-type {
-  margin-top: 12px; /* Make sure it matches others */
+  margin-top: 12px;  
 
 }
 
 .set-list {
   display: flex;
   flex-wrap: wrap;
+  flex-direction: column;
   gap: 10px;
   margin-top: 8px;
 }
 
-/* .set-card {
+.set-card {
   background-color: #fff;
   border: 1px solid #ccc;
   border-radius: 10px;
@@ -45,7 +49,7 @@
   flex-direction: column;
   min-width: 120px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-} */
+}
 
 .button-group {
   margin-top: 16px;
@@ -80,7 +84,7 @@
   }
   
   .set-card {
-    min-width: auto; /* let it fill parent width */
+    min-width: auto;  
     width: 100%;
   }
 }
