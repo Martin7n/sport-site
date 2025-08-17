@@ -36,6 +36,7 @@ The site is providing clean and minimalistic design with fast usability and func
 **Please, note**:
 #### In order to setup and start the project you need the enviroment variables - both server and client.  
 The enviroments variables contents are provided, with short commands/ creation instructions [HERE ](https://docs.google.com/document/d/1t4UBAzEXTxpBaik7koNf7pnJQcWu23NA/edit?usp=sharing&ouid=112489403354895278038&rtpof=true&sd=true "settings and .env needed")
+
 After adding the enviroments variables, the projects dependencies needs to be installed -  
 - "*npm i*" in the sport-site-server and in sport-site-client folders. 
 in separate teminals:
