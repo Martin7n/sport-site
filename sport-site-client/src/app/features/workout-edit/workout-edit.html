@@ -3,7 +3,7 @@
 
   <form [formGroup]="workoutForm" (ngSubmit)="submit()" class="form-card">
 
-    <!-- Workout Type -->
+     
     <div class="form-group">
       <label for="type">Workout Type</label>
       <input
@@ -18,14 +18,13 @@
       </div>
     </div>
 
-    <!-- Exercises -->
+ 
     <div formArrayName="exercises" class="exercises-section">
       <div *ngFor="let exCtrl of exercises.controls; let i = index" [formGroupName]="i" class="exercise-card">
 
         <h3>Exercise {{ i + 1 }}: {{ exCtrl.get('name')?.value }}</h3>
 
-        <!-- Sets -->
-        <div formArrayName="sets" class="sets-section">
+         <div formArrayName="sets" class="sets-section">
           <div
             *ngFor="let setCtrl of getSets(i).controls; let j = index"
             [formGroupName]="j"
@@ -71,7 +70,7 @@
       </div>
     </div>
 
-    <!-- Submit -->
+     
     <div class="form-actions">
       <button type="submit" [disabled]="loading || workoutForm.invalid" class="btn-primary">
         {{ loading ? 'Updating...' : 'Update Workout' }}

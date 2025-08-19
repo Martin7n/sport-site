@@ -38,6 +38,7 @@ export class App implements OnInit, OnDestroy {
   };
 
   ngOnInit(): void {
+    
      this.authService.validateSession().subscribe();
     window.addEventListener('storage', this.storageListener);
   }

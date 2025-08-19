@@ -1,31 +1,3 @@
-<!-- Tab Buttons -->
-<!-- <div class="flex gap-4 mb-6">
-  <button
-    class="px-4 py-2 rounded bg-gray-800 text-white"
-    [ngClass]="{ 'bg-blue-600': selectedTab === 'liked' }"
-    (click)="selectedTab = 'liked'"
-  >
-    Liked
-  </button>
-
-  <button
-    class="px-4 py-2 rounded bg-gray-800 text-white"
-    [ngClass]="{ 'bg-blue-600': selectedTab === 'created' }"
-    (click)="selectedTab = 'created'"
-  >
-    Created
-  </button>
-
-  <button
-    class="px-4 py-2 rounded bg-gray-800 text-white"
-    [ngClass]="{ 'bg-blue-600': selectedTab === 'generate' }"
-    (click)="selectedTab = 'generate'"
-  >
-    Generate New
-  </button>
-</div> -->
-
-
 <div class="tabs">
   <button (click)="selectTab('liked')" [class.active]="selectedTab === 'liked'">Liked</button>
   <button (click)="selectTab('created')" [class.active]="selectedTab === 'created'">Created</button>
@@ -92,7 +64,7 @@
   </div>
 </div>
 
-<!-- Created tab placeholder -->
+
  <div *ngIf="selectedTab === 'created'">
     <app-workout-list></app-workout-list>
   </div>

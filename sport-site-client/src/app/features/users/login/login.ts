@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { Router } from '@angular/router';
 import { AuthService } from '../../../core/services/auth-service/auth.service';
 import { CommonModule } from '@angular/common';
+import { BehaviorSubject } from 'rxjs';
 
 
 
@@ -22,7 +23,9 @@ export class Login {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    
+    
   ) {
     this.loginForm = this.fb.group({
       loginId: ['', [Validators.required, Validators.minLength(3)]],
@@ -31,6 +34,7 @@ export class Login {
     });
   }
 
+  
   get f() {
     return this.loginForm.controls;
   }
@@ -45,11 +49,13 @@ export class Login {
 
   const { loginId, password, rememberMe } = this.loginForm.value;
   const payload = { loginId, password };
-
+  
   this.authService.login(payload, rememberMe).subscribe({
     next: (res) => {
       console.log('Login success:', res);
-      this.router.navigate(['/']);
+      localStorage.setItem('auth_token', res.token);
+      // this.authService.isLoggedIn.set(true)
+       this.router.navigate(['/']);
     },
     error: (err) => {
       console.error('Login failed:', err);
