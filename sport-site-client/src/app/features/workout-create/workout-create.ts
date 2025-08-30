@@ -38,7 +38,6 @@ export class WorkoutCreateComponent implements OnInit {
     this.workoutService.getExercises().subscribe(data => {
       this.exercisesList = data;
 
-      // Add the first mandatory exercise form on init
       this.addExerciseForm();
     });
   }
@@ -60,7 +59,6 @@ export class WorkoutCreateComponent implements OnInit {
     return value * 2 === Math.round(value * 2) ? null : { invalidWeight: true };
   }
 
-  // Add an empty exercise form (to be filled by user)
   addExerciseForm() {
     const exForm = this.fb.group({
       exercise: [null, Validators.required],

@@ -10,52 +10,7 @@ import { environment } from '../../../../enviroments/enviroment';
 import {  Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
 
-// export interface AuthResponse {
-//   token: string;
-//   username: string;
-//   email: string;
-// }
 
-// @Injectable({ providedIn: 'root' })
-// export class AuthService {
-//   private readonly apiUrl = environment.myApiUrl + 'auth';
-
-//   constructor(private http: HttpClient) {}
-
-//   register(userData: any): Observable<AuthResponse> {
-//     return this.http.post<AuthResponse>(`${this.apiUrl}/register`, userData).pipe(
-//       tap((res) => {
-//         this.saveAuthData(res.token, res.username);
-//       })
-//     );
-//   }
-
-//   login(userData: any): Observable<AuthResponse> {
-//     return this.http.post<AuthResponse>(`${this.apiUrl}/login`, userData).pipe(
-//       tap((res) => {
-//         this.saveAuthData(res.token, res.username);
-//       })
-//     );
-//   }
-
-//   isLoggedIn(): boolean {
-//     return !!localStorage.getItem('authToken');
-//   }
-
-//   getUsername(): string | null {
-//     return localStorage.getItem('username');
-//   }
-
-//   logout(): void {
-//     localStorage.removeItem('authToken');
-//     localStorage.removeItem('username');
-//   }
-
-//   private saveAuthData(token: string, username: string) {
-//     localStorage.setItem('authToken', token);
-//     localStorage.setItem('username', username);
-//   }
-// }
 
 interface JwtPayload {
   id: string;

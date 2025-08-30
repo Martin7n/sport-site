@@ -66,39 +66,3 @@ ngOnInit(): void {
   }
 }
 
-
-
-
-// ngOnInit(): void {
-//   this.myDataService.getData().subscribe({
-//     next: (res: Complex[]) => {
-//       // assign data first
-//       this.data = res;
-
-//       // add randomImage property to each item
-//       this.data.forEach((item: any) => {
-//         const index = Math.floor(Math.random() * this.images.length);
-//         item.randomImage = `/images/${this.images[index]}`;
-//       });
-
-//       this.loading = false;
-//     },
-//     error: (err) => {
-//       this.error = 'Error loading data';
-//       this.loading = false;
-//     }
-//   });}
-// }
-
-//   ngOnInit(): void {
-//     this.myDataService.getData().subscribe({
-//       next: (res) => {
-//         this.data = res;
-//         this.loading = false;
-//       },
-//       error: (err) => {
-//         this.error = 'Error loading data';
-//         this.loading = false;
-//       }
-//     });
-//   }
